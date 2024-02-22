@@ -1,0 +1,13 @@
+.hero{
+    background-color: var(--body-color-light);
+}
+.hero__info{
+    grid-column: 2/7;
+}
+h1{
+    font-weight: var(--font-medium);
+    span{
+        font-style: italic;
+        font-size: var(--h1-font-size);
+    }
+}

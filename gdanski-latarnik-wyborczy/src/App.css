@@ -1,42 +1,202 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+/* VARIABLES CSS */
+:root{
+/* COLORS */
+  --text-color-light: white;
+  --text-color-dark: black;
+
+  --body-color-light: #e7e5e5;
+  --body-color-dark: black;
+
+  --dark-grey: #1b1b27;
+  --akcent-fade: rgba(90, 49, 161, 0.556);
+  --akcent: rgb(90, 49, 161);
+
+
+  /* FONT AND TYPOGRAPHY */
+  --prime-font: 'Helveticaneue', sans-serif;
+  --second-font: "Cormorant Garamond", serif;
+
+  /* .5rem = 8px | 1rem = 16px */
+  --h1-font-size: 5rem;
+  --h2-font-size: 3rem;
+  --h3-font-size: 1.5rem;
+  --nav-font-size: 1.12rem;
+  --normal-font-size: 1rem;
+
+  /* --small-font-size: .875rem;
+  --smaller-font-size: .813rem;
+  --tiny-font-size: .625rem; */
+
+  /* FONT WEIGHT */
+  --font-normal: 300;
+  --font-medium: 500;
+  --font-bold: 700;
+
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+/* Responsive typography */
+/* @media screen and (max-width: 1550px) {
+  :root {
+    --h1-font-size: 5rem;
+    --h3-font-size: 5rem;
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media screen and (max-width: 992px) {
+  :root {
+    --h1-font-size: 3rem;
+    --h3-font-size: 3rem;
+    --h2-font-size: 2rem;
+  }
+}
+@media screen and (max-width: 576px) {
+  :root {
+    --h1-font-size: 2rem;
+    --h3-font-size: 2rem;
+    --h2-font-size: 1.2rem;
+  }
+}  */
+
+/* ========= BASE ========= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--prime-font);
+  font-size: var(--normal-font-size);
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  background-color: var(--body-color-light);
+  color: var(--text-color-dark);
+}
+h1{
+  letter-spacing: -.04em;
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-bold);
+  color: var(--text-color-dark);
+  line-height: 100%;
+}
+h2{
+  letter-spacing: -.04em;
+  font-weight: var(--font-medium);
+  font-size: var(--h2-font-size);
+  color: var(--text-color-dark);
+  line-height: 100%;
+  text-transform: uppercase;
+}
+h3 {
+  font-weight: var(--font-normal);
+  font-size: var(--h3-font-size);
+  color: var(--text-color-dark);
+  line-height: 100%;
+}
+p{
+  font-weight: var(--font-normal);
+  font-size: var(--normal-font-size);
+  color: var(--text-color-dark);
+  line-height: 100%;
+}
+
+/* h4{
+  font-weight: var(--font-medium);
+  font-size: var(--h4-font-size);
+  font-style: italic;
+  color: var(--text-color-dark);
+} */
+
+ul{
+  list-style: none;
+
+}
+
+a{
+  text-decoration: none;
+  color: var(--text-color-dark);
+  font-size: var(--nav-font-size);
+}
+a:hover{
+  color: var(--akcent);
+}
+
+button{
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+/* ========= LAYOUT ========= */
+.section {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3rem;
+  position: relative;
+  padding: 50px 0;
+  background-color: var(--body-color-light);
+}
+
+/* ========= BUTTONS ========= */
+
+.button {
+  background-color: var(--akcent);
+  color: var(--text-color-light);
+  text-transform: capitalize;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  font-weight: var(--font-normal);
+}
+
+.button:hover{
+  background-color: var(--akcent-fade);
+}
+
+.button__flex{
+  display: flex;
+  align-items: center;
+}
+
+.button__icon{
+  height: 1rem;
+  fill: var(--text-color-light);
+  color: var(--text-color-light);
+  margin-right: .5rem;
+  border: none;
+}
+
+/* ========= BRAKEPOINTS ========= */
+/* For large devices */
+@media screen and (max-width: 992px) {
+  .button{
+    padding: .7rem 1.75rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* For medium devices */
+@media screen and (max-width: 768px) {
+  .section{
+    gap: 0;
   }
 }
 
-.card {
-  padding: 2em;
-}
+/* @media screen and (max-width: 576px) {
+  
+}  */
+/* For small devices */
+@media screen and (max-width: 350px) {
 
-.read-the-docs {
-  color: #888;
 }

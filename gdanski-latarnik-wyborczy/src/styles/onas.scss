@@ -1,0 +1,12 @@
+.onas{
+    height: 100vh;
+    background-color: var(--body-color-light);
+    align-items: start;
+    padding-top: 200px;
+    .onas__tytul{
+        grid-column: 2/6;
+    }
+    .onas__info{
+        grid-column: 6/12;
+    }
+}

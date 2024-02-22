@@ -1,0 +1,19 @@
+.kontakt{
+    background-color: var(--body-color-dark);
+    padding-bottom: 0;
+    h1, h2, h3, p{
+        color: var(--text-color-light);
+
+    }
+    .kontakt__info{
+        grid-column: 2/12;
+    }
+    footer{
+        grid-column: 2/12;
+        display: flex;
+        border-top: 1px solid var(--text-color-light);
+        align-items: center;
+        gap: 2rem;
+        padding: 1rem 0;
+    }
+}
