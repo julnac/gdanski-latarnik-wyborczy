@@ -1,4 +1,6 @@
 import "../styles/kontakt.scss";
+import { Link } from "react-router-dom";
+
 
 const Kontakt = () => {
     return (
@@ -6,7 +8,7 @@ const Kontakt = () => {
             <div className="kontakt__info">
                 <h2>KONTAKT</h2>
                 <h1>Kontakt</h1>
-                <a href="#Test"><button className="button">Rozpocznij test</button></a>
+                <Link to="/Ankieta"><button className="button">Rozpocznij test</button></Link>
             </div>
             <footer>
                 <p>Info</p>

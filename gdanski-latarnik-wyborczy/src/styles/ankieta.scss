@@ -1,0 +1,63 @@
+.ankieta{
+    margin: 0;
+    padding: 0;
+    .nawigacja{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        grid-column: 1/13;
+        padding: 2rem 2rem 0 2rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+    }
+    .ankieta__karuzela{
+        grid-column: 2/12;
+        height: 100vh;
+        .slajd{
+            padding-top: 10vh;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .noglowek{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 2rem;
+            }
+            .slajd__stwierdzenie{
+                text-align: center;
+            }
+            .slajd__odpowiedzi{
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                margin: 2rem 0;
+            }
+            .slajd__waga{
+                // display: none;
+                .slajd__waga-pytanie{
+                    text-align: center;
+                }
+                .slajd__waga-odpowiedzi{
+                    margin: 2rem 0;
+                    display: flex;
+                    justify-content: center;
+                    gap: 2rem;
+                }
+            }
+        }
+        .stronicowanie{
+            height: 10%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .button__secondary{
+                border: none;
+                padding: 1rem;
+            }
+        }
+    }
+}

@@ -5,10 +5,10 @@ const Nav = () => {
     return (
         <nav id="nav">
             <div className="logo">
-                <a href="#Home">Gdański Latarnik Wyborczy</a>
+                <a href="#Hero">Gdański Latarnik Wyborczy</a>
             </div>
             <ul>
-                <li><Link to="/"><a href="#Onas">O latarniku</a></Link></li>
+                <li><a href="#Onas">O latarniku</a></li>
                 <li><a href="#Faq">FAQ</a></li>
                 <li><a href="#Twórcy">Twórcy</a></li>
                 <li><a href="#Kontakt">Kontakt</a></li>

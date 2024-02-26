@@ -1,8 +1,10 @@
 import "../styles/hero.scss";
+import { Link } from "react-router-dom";
+
 
 const Hero = () => {
     return (
-        <section className="section hero" id="Home">
+        <section className="section hero" id="Hero">
             <div className="hero__info">
                 <h1><span>Sprawdź </span>swoje poglądy</h1>
 
@@ -10,8 +12,7 @@ const Hero = () => {
                     do kogo jest Ci najbliżej w wyborach
                     parlamentarnych 2023 roku.
                 </h3>
-
-                <a href="#Test"><button className="button">Rozpocznij test</button></a>
+                <Link to="/Ankieta"><button className="button">Rozpocznij test</button></Link>
             </div>
         </section>
     )
