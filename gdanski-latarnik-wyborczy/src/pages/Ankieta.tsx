@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 
 const Ankieta = () => {
+    
     return (
         <section className="section ankieta" id="Ankieta">
             <div className="nawigacja">
@@ -19,7 +20,9 @@ const Ankieta = () => {
                             <button>Wyjaśnienie stwierdzenia</button>
                         </div>
                     </div>
-                    <div className="slajd__stwierdzenie">Stwierdzenie</div>
+                    <div className="slajd__stwierdzenie">
+                        <h3>Należy zwiększyć transfery społeczne, by ograniczyć skutki inflacji dla obywateli.</h3>
+                    </div>
                     <div className="slajd__odpowiedzi">
                         <button className="button__secondary">Zgadzam się</button>
                         <button className="button__secondary">nie zgadzam się</button>
