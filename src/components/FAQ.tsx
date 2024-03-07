@@ -1,6 +1,6 @@
 import "../styles/faq.scss";
 
-const FAQ = () => {
+const Faq = () => {
     return (
         <section className="section faq" id="Faq">
             <div className="faq__tytul">
@@ -41,4 +41,4 @@ const FAQ = () => {
     )
 }
 
-export default FAQ;
+export default Faq;

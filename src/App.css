@@ -178,6 +178,34 @@ img{
   border: none;
 }
 
+.button__secondary {
+  background-color: var(--body-color-light);
+  border: 2px solid var(--akcent);
+  color: var(--akcent);
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  font-weight: var(--font-bold);
+}
+
+.button__secondary:hover{
+  color: var(--akcent-fade);
+  border: 2px solid var(--akcent-fade);
+}
+
+.button__secondary:active{
+  background-color: var(--akcent);
+  color: var(--text-color-light);
+}
+.button__secondary_active{
+  background-color: var(--akcent);
+  color: var(--text-color-light);
+}
+.button__secondary_active:hover{
+  background-color: var(--akcent);
+  color: var(--text-color-light);
+}
+
 /* ========= BRAKEPOINTS ========= */
 /* For large devices */
 @media screen and (max-width: 992px) {
