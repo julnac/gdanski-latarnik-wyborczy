@@ -13,7 +13,7 @@ const Nav = () => {
                 <li><a href="#Twórcy">Twórcy</a></li>
                 <li><a href="#Kontakt">Kontakt</a></li>
             </ul>
-            <Link to="/Ankieta"><button className="button">Rozpocznij test</button></Link>
+            <Link to="/Form"><button className="button">Rozpocznij test</button></Link>
         </nav>
     )
 }

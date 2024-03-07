@@ -8,7 +8,7 @@ const Kontakt = () => {
             <div className="kontakt__info">
                 <h2>KONTAKT</h2>
                 <h1>Kontakt</h1>
-                <Link to="/Ankieta"><button className="button">Rozpocznij test</button></Link>
+                <Link to="/Form"><button className="button">Rozpocznij test</button></Link>
             </div>
             <footer>
                 <p>Info</p>
