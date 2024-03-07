@@ -197,6 +197,14 @@ img{
   background-color: var(--akcent);
   color: var(--text-color-light);
 }
+.button__secondary_active{
+  background-color: var(--akcent);
+  color: var(--text-color-light);
+}
+.button__secondary_active:hover{
+  background-color: var(--akcent);
+  color: var(--text-color-light);
+}
 
 /* ========= BRAKEPOINTS ========= */
 /* For large devices */

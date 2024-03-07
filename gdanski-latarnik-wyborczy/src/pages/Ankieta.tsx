@@ -1,23 +1,30 @@
 import "../styles/ankieta.scss";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Statement } from '../models/Statement';
+import { Answer } from "../models/Answer";
 
 
 const Ankieta = () => {
-
+    const [statementsAnswers, setStatementsAnswers] = useState<Answer[]>([]);
     const [statements, setStatements] = useState<Statement[]>([]);
     const [currentStatement, setCurrentStatement] = useState<Statement | null>(null);
-    const handleStatementChange = () => {
-        console.log(currentStatement?.index)
-        if (currentStatement && currentStatement.index < statements.length - 1) {
-            const newIndex = currentStatement.index + 1;
-            console.log(newIndex)
-            setCurrentStatement(statements[newIndex]);
+    const handleStatementChange = (argument: number | null) => {
+        if (argument !== null){
+            setCurrentStatement(statements[argument]);
+            setIsSignificanceVisible(false)
         } else {
-            console.log('Koniec testu');
+            // console.log(currentStatement?.index)
+            if (currentStatement && currentStatement.index < statements.length - 1) {
+                const newIndex = currentStatement.index + 1;
+                // console.log(newIndex)
+                setCurrentStatement(statements[newIndex]);
+                setIsSignificanceVisible(false)
+            } else {
+                console.log('Koniec testu');
+            }
         }
-    }
+    };
 
     //WYJAŚNIENIE//
     const [isExplanationVisible, setIsExplanationVisible] = useState<boolean>(false);
@@ -26,15 +33,24 @@ const Ankieta = () => {
         setIsExplanationVisible(!isExplanationVisible);
     };
 
-    //SIGNIFICANCE//
+    //CHOICE//
     const [isSignificanceVisible, setIsSignificanceVisible] = useState<boolean>(false);
+    const [clickedButtonId, setClickedButtonId] = useState<string | null>(null);
 
-    const handleSignificanceVisibility = () => {
-        setIsSignificanceVisible(!isSignificanceVisible);
-
-    }
+    const handleClick = (buttonId: string) => {
+        console.log(buttonId);
+        setClickedButtonId(buttonId);
+        if (buttonId === 'agreeButton' || buttonId === 'disagreeButton'){
+            setIsSignificanceVisible(true);
+        }else{
+            handleStatementChange(null);
+            console.log(statementsAnswers);
+            // TODO - fix it
+        }
+    };
 
     //SELECTED BUTTON COLOR//
+    // const [coloredButton, setColoredButton] = useState<boolean>(false);
     // const btn = document.getElementsByTagName('button');
 
     // for (let i = 0; i < buttons.length; i++) {
@@ -43,13 +59,6 @@ const Ankieta = () => {
     //     })
     // }
 
-    const agreeButton = useRef<HTMLButtonElement>(null);
-    const disagreeButton = useRef<HTMLButtonElement>(null);
-    const doNotKnowButton = useRef<HTMLButtonElement>(null);
-    
-
-    
- 
     useEffect(() => {
         // Fetch CSV file
         fetch('/stwierdzenia.csv')
@@ -58,18 +67,21 @@ const Ankieta = () => {
                 const lines = csv.split('\n');
                 const data = lines.map(line => line.split(';'));
 
-                const dataLength = data.length;
+                const dataWithoutHeader = data.slice(1);
+                const dataLength = dataWithoutHeader.length;
                 const statements: Statement[] = new Array(dataLength);
 
+                
                 for (let index = 0; index < dataLength; index++) {
                     statements[index] = {
                         index: index,
-                        statementText: data[index][0],
-                        explanation: data[index][1],
+                        statementText: dataWithoutHeader[index][0],
+                        explanation: dataWithoutHeader[index][1],
                     }
                 }
                 setStatements(statements);
-                setCurrentStatement(statements[1])
+                setCurrentStatement(statements[0])
+                setStatementsAnswers(Array(dataLength).fill(new Answer()));
             })
             .catch(error => console.error('Error fetching CSV file:', error));
         }, []);
@@ -85,7 +97,7 @@ const Ankieta = () => {
             <div className="ankieta__karuzela">
                 <div className="slajd">
                     <div className="noglowek">
-                        <div className="tytul"><h3>Stwierdzenie: {currentStatement ? currentStatement.index : 'Loading...'}</h3></div>
+                        <div className="tytul"><h3>Stwierdzenie: {currentStatement ? currentStatement.index + 1 : 'Loading...'}</h3></div>
                         <div className="wyjasnienie">
                             <button onClick={handleExplanationOpen}>Wyjaśnienie stwierdzenia</button>
                             
@@ -113,9 +125,9 @@ const Ankieta = () => {
                         <h3>{currentStatement ? currentStatement.statementText : 'Loading...'}</h3>
                     </div>
                     <div className="slajd__odpowiedzi">
-                        <button className="button__secondary" ref={agreeButton} onClick={() => handleSignificanceVisibility()}>Zgadzam się</button>
-                        <button className="button__secondary" ref={disagreeButton} onClick={handleSignificanceVisibility}>nie zgadzam się</button>
-                        <button className="button__secondary" ref={doNotKnowButton} onClick={handleStatementChange}>nie mam zdania</button>
+                        <button  id="agreeButton" className={`button__secondary ${clickedButtonId === 'agreeButton' ? 'button__secondary_active' : ''}`} onClick={() => handleClick('agreeButton')}>Zgadzam się</button>
+                        <button id="disagreeButton" className={`button__secondary ${clickedButtonId === 'disagreeButton' ? 'button__secondary_active' : ''}`} onClick={() => handleClick('disagreeButton')}>nie zgadzam się</button>
+                        <button id="doNotKnowButton" className="button__secondary" onClick={() => handleClick('doNotKnowButton')}>nie mam zdania</button>
                     </div>
                     {isSignificanceVisible ? 
                     <div className="slajd__waga">
@@ -123,23 +135,26 @@ const Ankieta = () => {
                             Czy ta kwestia jest dla Ciebie bardzo ważna?
                         </div>
                         <div className="slajd__waga-odpowiedzi">
-                            <button className="button__secondary" onClick={handleStatementChange}>tak</button>
-                            <button className="button__secondary" onClick={handleStatementChange}>nie</button>
+                            <button id="tak" className="button__secondary" onClick={() => handleClick('tak')}>tak</button>
+                            <button id="nie" className="button__secondary" onClick={() => handleClick('nie')}>nie</button>
                         </div>
                     </div>
                     : <></>}
                 </div>
                 <div className="stronicowanie">
-                    <button className="button__secondary">1</button>
-                    <button className="button__secondary">2</button>
-                    <button className="button__secondary">3</button>
-                    <button className="button__secondary">4</button>
-                    <button className="button__secondary">5</button>
-                    <button className="button__secondary">6</button>
-                    <button className="button__secondary">7</button>
-                    <button className="button__secondary">8</button>
-                    <button className="button__secondary">9</button>
-                    <button className="button__secondary">10</button>
+                    {statements.map((_, i) => (
+                        <button className={`button__secondary ${currentStatement?.index == i ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(i)}>{i+1}</button>
+                    ))}
+                    {/* <button className={`button__secondary ${currentStatement?.index == 1 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(1)}>1</button>
+                    <button className={`button__secondary ${currentStatement?.index == 2 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(2)}>2</button>
+                    <button className={`button__secondary ${currentStatement?.index == 3 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(3)}>3</button>
+                    <button className={`button__secondary ${currentStatement?.index == 4 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(4)}>4</button>
+                    <button className={`button__secondary ${currentStatement?.index == 5 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(5)}>5</button>
+                    <button className={`button__secondary ${currentStatement?.index == 6 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(6)}>6</button>
+                    <button className={`button__secondary ${currentStatement?.index == 7 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(7)}>7</button>
+                    <button className={`button__secondary ${currentStatement?.index == 8 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(8)}>8</button>
+                    <button className={`button__secondary ${currentStatement?.index == 9 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(9)}>9</button>
+                    <button className={`button__secondary ${currentStatement?.index == 10 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(10)}>10</button> */}
                 </div>
             </div>
         </section>
