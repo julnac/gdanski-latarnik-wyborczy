@@ -8,7 +8,7 @@ import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 
 const Form = () => {
     const [statements, setStatements] = useState<Statement[]>([]);
-    const [currentStatement, setCurrentStatement] = useState<Statement | null>(null);
+    const [currentStatement, setCurrentStatement] = useState<Statement>();
     const [statementsAnswers, setStatementsAnswers] = useState<Answer[]>([]);
 
     const [isExplanationVisible, setIsExplanationVisible] = useState<boolean>(false);
@@ -44,55 +44,31 @@ const Form = () => {
             .catch(error => console.error('Error fetching CSV file:', error));
     }, []);
 
-    const handleStatementChange = (argument: number | null) => {
-
+    const handleStatementChange = (newIndex: number) => {
         setStatementAnswer(StatementAnswer.Unselected);
         setSignificanceAnswer(SignificanceAnswer.Unselected);
-        if (argument !== null){
-            if (statementsAnswers[argument].isAnswered()){
-                const answer = statementsAnswers[argument];
-                if (answer.statementAnswer === StatementAnswer.Neutral){
-                    setIsSignificanceVisible(false);
-                }
-                else {
-                    setIsSignificanceVisible(true);
-                    setSignificanceAnswer(answer.significanceAnswer);
-                }
 
-                setStatementAnswer(answer.statementAnswer);
+        if (statementsAnswers[newIndex].isAnswered()){
+            const answer = statementsAnswers[newIndex];
+            if (answer.statementAnswer === StatementAnswer.Neutral){
+                setIsSignificanceVisible(false);
             }
             else {
-                setIsSignificanceVisible(false)
+                setIsSignificanceVisible(true);
+                setSignificanceAnswer(answer.significanceAnswer);
             }
 
-            setCurrentStatement(statements[argument]);
-
+            setStatementAnswer(answer.statementAnswer);
         }
         else {
-            const newIndex = currentStatement!.index + 1;
-            if (statementsAnswers[newIndex].isAnswered()){
-                const answer = statementsAnswers[newIndex];
-                if (answer.statementAnswer === StatementAnswer.Neutral){
-                    setIsSignificanceVisible(false);
-                }
-                else {
-                    setIsSignificanceVisible(true);
-                    setSignificanceAnswer(answer.significanceAnswer);
-                }
-
-                setStatementAnswer(answer.statementAnswer);
-                setCurrentStatement(statements[newIndex]);
-            }
-            else {
-                if (currentStatement && currentStatement.index < statements.length - 1) {
-                    setCurrentStatement(statements[newIndex]);
-                    setIsSignificanceVisible(false)
-                    setCurrentStatement(statements[newIndex]);
-                } else {
-                    console.log('Koniec testu');
-                }
+            if (currentStatement && currentStatement.index < statements.length - 1) {
+                setIsSignificanceVisible(false)
+            } else {
+                console.log('Koniec testu');
             }
         }
+
+        setCurrentStatement(statements[newIndex]);
     };
 
     const handleExplanationOpen = () => {
@@ -115,11 +91,11 @@ const Form = () => {
             const answer = new Answer(statementAnswer);
             setAnswer(currentStatement!.index, answer);
         }
-        else{
+        else if (statementAnswer === StatementAnswer.Neutral){
             const answer = new Answer(StatementAnswer.Neutral);
             setAnswer(currentStatement!.index, answer);
 
-            handleStatementChange(null);
+            handleStatementChange(currentStatement!.index + 1);
         }
     };
 
@@ -130,7 +106,7 @@ const Form = () => {
         answer.significanceAnswer = significanceAnswer;
         setAnswer(currentStatement!.index, answer);
 
-        handleStatementChange(null);
+        handleStatementChange(currentStatement!.index + 1);
     };
 
     return (
