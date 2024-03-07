@@ -145,16 +145,7 @@ const Ankieta = () => {
                     {statements.map((_, i) => (
                         <button className={`button__secondary ${currentStatement?.index == i ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(i)}>{i+1}</button>
                     ))}
-                    {/* <button className={`button__secondary ${currentStatement?.index == 1 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(1)}>1</button>
-                    <button className={`button__secondary ${currentStatement?.index == 2 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(2)}>2</button>
-                    <button className={`button__secondary ${currentStatement?.index == 3 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(3)}>3</button>
-                    <button className={`button__secondary ${currentStatement?.index == 4 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(4)}>4</button>
-                    <button className={`button__secondary ${currentStatement?.index == 5 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(5)}>5</button>
-                    <button className={`button__secondary ${currentStatement?.index == 6 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(6)}>6</button>
-                    <button className={`button__secondary ${currentStatement?.index == 7 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(7)}>7</button>
-                    <button className={`button__secondary ${currentStatement?.index == 8 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(8)}>8</button>
-                    <button className={`button__secondary ${currentStatement?.index == 9 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(9)}>9</button>
-                    <button className={`button__secondary ${currentStatement?.index == 10 ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(10)}>10</button> */}
+                    <Link to="/Wynik"><button className="button__secondary">Wynik</button></Link>
                 </div>
             </div>
         </section>
