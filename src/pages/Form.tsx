@@ -8,13 +8,15 @@ import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 
 const Form = () => {
     const [statements, setStatements] = useState<Statement[]>([]);
-    const [currentStatement, setCurrentStatement] = useState<Statement>();
+    const [currentStatement, setCurrentStatement] = useState<Statement>(new Statement());
     const [statementsAnswers, setStatementsAnswers] = useState<Answer[]>([]);
 
     const [isExplanationVisible, setIsExplanationVisible] = useState<boolean>(false);
     const [isSignificanceVisible, setIsSignificanceVisible] = useState<boolean>(false);
     const [statementAnswer, setStatementAnswer] = useState<StatementAnswer>(StatementAnswer.Unselected);
     const [significanceAnswer, setSignificanceAnswer] = useState<SignificanceAnswer>(SignificanceAnswer.Unselected);
+
+    const [lastAnsweredStatement, setLastAnsweredStatement] = useState<number>(0);
 
     // clear vars after new question??
 
@@ -32,9 +34,9 @@ const Form = () => {
 
                 for (let index = 0; index < dataLength; index++) {
                     statements[index] = {
-                        index: index,
-                        statementText: dataWithoutHeader[index][0],
-                        explanation: dataWithoutHeader[index][1],
+                        Index: index,
+                        StatementText: dataWithoutHeader[index][0],
+                        Explanation: dataWithoutHeader[index][1],
                     }
                 }
                 setStatements(statements);
@@ -47,6 +49,10 @@ const Form = () => {
     const handleStatementChange = (newIndex: number) => {
         setStatementAnswer(StatementAnswer.Unselected);
         setSignificanceAnswer(SignificanceAnswer.Unselected);
+
+        if (newIndex > lastAnsweredStatement) {
+            setLastAnsweredStatement(newIndex);
+        }
 
         if (statementsAnswers[newIndex].isAnswered()){
             const answer = statementsAnswers[newIndex];
@@ -61,7 +67,7 @@ const Form = () => {
             setStatementAnswer(answer.statementAnswer);
         }
         else {
-            if (currentStatement && currentStatement.index < statements.length - 1) {
+            if (currentStatement && currentStatement.Index < statements.length - 1) {
                 setIsSignificanceVisible(false)
             } else {
                 console.log('Koniec testu');
@@ -86,27 +92,33 @@ const Form = () => {
         setStatementAnswer(statementAnswer);
         if (statementAnswer === StatementAnswer.Agree || statementAnswer === StatementAnswer.Disagree){
 
+            if (statementsAnswers[currentStatement.Index].isAnswered()){
+                if (statementAnswer !== statementsAnswers[currentStatement.Index].statementAnswer){
+                    setSignificanceAnswer(SignificanceAnswer.Unselected);
+                }
+            }
+
             setIsSignificanceVisible(true);
 
             const answer = new Answer(statementAnswer);
-            setAnswer(currentStatement!.index, answer);
+            setAnswer(currentStatement.Index, answer);
         }
         else if (statementAnswer === StatementAnswer.Neutral){
             const answer = new Answer(StatementAnswer.Neutral);
-            setAnswer(currentStatement!.index, answer);
+            setAnswer(currentStatement.Index, answer);
 
-            handleStatementChange(currentStatement!.index + 1);
+            handleStatementChange(currentStatement.Index + 1);
         }
     };
 
     const handleSignificanceButtonClick = (significanceAnswer: SignificanceAnswer) => {
         console.log(significanceAnswer);
 
-        const answer = statementsAnswers[currentStatement!.index];
+        const answer = statementsAnswers[currentStatement.Index];
         answer.significanceAnswer = significanceAnswer;
-        setAnswer(currentStatement!.index, answer);
+        setAnswer(currentStatement.Index, answer);
 
-        handleStatementChange(currentStatement!.index + 1);
+        handleStatementChange(currentStatement.Index + 1);
     };
 
     return (
@@ -120,7 +132,7 @@ const Form = () => {
             <div className="ankieta__karuzela">
                 <div className="slajd">
                     <div className="noglowek">
-                        <div className="tytul"><h3>Stwierdzenie: {currentStatement ? currentStatement.index + 1 : 'Loading...'}</h3></div>
+                        <div className="tytul"><h3>Stwierdzenie: {currentStatement ? currentStatement.Index + 1 : 'Loading...'}</h3></div>
                         <div className="wyjasnienie">
                             <button onClick={handleExplanationOpen}>Wyjaśnienie stwierdzenia</button>
                             {isExplanationVisible ?
@@ -131,7 +143,7 @@ const Form = () => {
                                                 <path d="M4 12H20M12 4V20" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                             </svg>
                                         </button>
-                                        <p> {currentStatement ? currentStatement.explanation : 'Loading...'}</p>
+                                        <p> {currentStatement ? currentStatement.Explanation : 'Loading...'}</p>
                                     </div>
                                 </div>
                                 : <></>
@@ -139,7 +151,7 @@ const Form = () => {
                         </div>
                     </div>
                     <div className="slajd__stwierdzenie">
-                        <h3>{currentStatement ? currentStatement.statementText : 'Loading...'}</h3>
+                        <h3>{currentStatement ? currentStatement.StatementText : 'Loading...'}</h3>
                     </div>
                     <div className="slajd__odpowiedzi">
                         <button
@@ -185,7 +197,14 @@ const Form = () => {
                 </div>
                 <div className="stronicowanie">
                     {statements.map((_, i) => (
-                        <button className={`button__secondary ${currentStatement?.index == i ? 'button__secondary_active' : ''}`} onClick={() => handleStatementChange(i)}>{i+1}</button>
+                        <button
+                            disabled={i > lastAnsweredStatement}
+                            className={
+                            `button__secondary${currentStatement.Index == i ? 'button__secondary_active' : ''} 
+                            ${ (i > lastAnsweredStatement) ? 'button__disabled' : ''}`}
+                            onClick={() => handleStatementChange(i)}>
+                            {i+1}
+                        </button>
                     ))}
                     <Link to="/Wynik"><button className="button__secondary">Wynik</button></Link>
                 </div>
