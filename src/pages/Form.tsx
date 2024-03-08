@@ -1,23 +1,27 @@
 import "../styles/form.scss";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from 'react';
 import {Statement} from '../models/Statement';
 import {Answer} from "../models/Answer";
 import {StatementAnswer} from "../enums/StatementAnswer.tsx";
 import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
+import ResultModal from "../components/ResultModal.tsx";
 
 const Form = () => {
     const [statements, setStatements] = useState<Statement[]>([]);
     const [currentStatement, setCurrentStatement] = useState<Statement>(new Statement());
-    const [statementsAnswers, setStatementsAnswers] = useState<Answer[]>([]);
+    const [answers, setAnswers] = useState<Answer[]>([]);
 
     const [isExplanationVisible, setIsExplanationVisible] = useState<boolean>(false);
     const [isSignificanceVisible, setIsSignificanceVisible] = useState<boolean>(false);
     const [statementAnswer, setStatementAnswer] = useState<StatementAnswer>(StatementAnswer.Unselected);
     const [significanceAnswer, setSignificanceAnswer] = useState<SignificanceAnswer>(SignificanceAnswer.Unselected);
 
-    const [lastAnsweredStatement, setLastAnsweredStatement] = useState<number>(0);
+    const [farthestAnsweredStatementIndex, setFarthestAnsweredStatementIndex] = useState<number>(0);
 
+    const [isResultModalVisible, setIsResultModalVisible] = useState<boolean>(false);
+
+    const navigate = useNavigate();
     // clear vars after new question??
 
     useEffect(() => {
@@ -41,40 +45,64 @@ const Form = () => {
                 }
                 setStatements(statements);
                 setCurrentStatement(statements[0])
-                setStatementsAnswers(Array(dataLength).fill(new Answer()));
+
+                const storageAnswersString = localStorage.getItem('answers');
+                if (storageAnswersString) {
+                    const parsedAnswers: Answer[] = JSON.parse(storageAnswersString);
+                    if (parsedAnswers.length !== dataLength) {
+                        localStorage.removeItem('answers');
+                        setAnswers(Array(dataLength).fill(new Answer()));
+                        return;
+                    }
+                    const storageAnswers = parsedAnswers.map((answer) => new Answer(answer.statementAnswer, answer.significanceAnswer));
+                    setAnswers(storageAnswers);
+                    setFarthestAnsweredStatementIndex(storageAnswers.length - 1);
+                    setCurrentStatement(statements[0]);
+                    setUserAnswer(storageAnswers[0]);
+                }
+                else {
+                    localStorage.removeItem('answers');
+                    setAnswers(Array(dataLength).fill(new Answer()));
+                }
             })
             .catch(error => console.error('Error fetching CSV file:', error));
     }, []);
 
-    const handleStatementChange = (newIndex: number) => {
-        setStatementAnswer(StatementAnswer.Unselected);
-        setSignificanceAnswer(SignificanceAnswer.Unselected);
-
-        if (newIndex > lastAnsweredStatement) {
-            setLastAnsweredStatement(newIndex);
-        }
-
-        if (statementsAnswers[newIndex].isAnswered()){
-            const answer = statementsAnswers[newIndex];
-            if (answer.statementAnswer === StatementAnswer.Neutral){
-                setIsSignificanceVisible(false);
-            }
-            else {
-                setIsSignificanceVisible(true);
-                setSignificanceAnswer(answer.significanceAnswer);
-            }
-
-            setStatementAnswer(answer.statementAnswer);
+    function setUserAnswer(answer: Answer) {
+        if (answer.statementAnswer === StatementAnswer.Neutral){
+            setIsSignificanceVisible(false);
+            setSignificanceAnswer(SignificanceAnswer.Unselected);
         }
         else {
-            if (currentStatement && currentStatement.Index < statements.length - 1) {
-                setIsSignificanceVisible(false)
-            } else {
-                console.log('Koniec testu');
-            }
+            setIsSignificanceVisible(true);
+            setSignificanceAnswer(answer.significanceAnswer);
         }
 
-        setCurrentStatement(statements[newIndex]);
+        setStatementAnswer(answer.statementAnswer);
+    }
+
+    const handleStatementChange = (newIndex: number) => {
+        if (newIndex >= statements.length) {
+            console.log('Koniec testu');
+            setIsResultModalVisible(true);
+            // TODO disable rest of screen
+        }
+        else {
+            setCurrentStatement(statements[newIndex]);
+
+            if (newIndex > farthestAnsweredStatementIndex) {
+                setFarthestAnsweredStatementIndex(newIndex);
+            }
+
+            if (answers[newIndex].isAnswered()){
+                setUserAnswer(answers[newIndex]);
+            }
+            else {
+                setStatementAnswer(StatementAnswer.Unselected);
+                setIsSignificanceVisible(false);
+                setSignificanceAnswer(SignificanceAnswer.Unselected);
+            }
+        }
     };
 
     const handleExplanationOpen = () => {
@@ -82,18 +110,17 @@ const Form = () => {
     };
 
     const setAnswer = (index: number, answer: Answer) => {
-        const updatedAnswers = [...statementsAnswers];
+        const updatedAnswers = [...answers];
         updatedAnswers[index] = answer;
-        setStatementsAnswers(updatedAnswers);
+        setAnswers(updatedAnswers);
     }
 
     const handleStatementButtonClick = (statementAnswer: StatementAnswer) => {
-        console.log(statementAnswer);
         setStatementAnswer(statementAnswer);
         if (statementAnswer === StatementAnswer.Agree || statementAnswer === StatementAnswer.Disagree){
 
-            if (statementsAnswers[currentStatement.Index].isAnswered()){
-                if (statementAnswer !== statementsAnswers[currentStatement.Index].statementAnswer){
+            if (answers[currentStatement.Index].isAnswered()){
+                if (statementAnswer !== answers[currentStatement.Index].statementAnswer){
                     setSignificanceAnswer(SignificanceAnswer.Unselected);
                 }
             }
@@ -112,14 +139,36 @@ const Form = () => {
     };
 
     const handleSignificanceButtonClick = (significanceAnswer: SignificanceAnswer) => {
-        console.log(significanceAnswer);
-
-        const answer = statementsAnswers[currentStatement.Index];
+        const answer = answers[currentStatement.Index];
         answer.significanceAnswer = significanceAnswer;
         setAnswer(currentStatement.Index, answer);
 
         handleStatementChange(currentStatement.Index + 1);
     };
+
+    const handleOpenModal = () => {
+        setIsResultModalVisible(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsResultModalVisible(false);
+    };
+
+    const hasUserAnsweredAllQuestions = () => {
+        return answers.every(answer => answer.isAnswered());
+    }
+
+    function handleShowResult() {
+        const answersString = JSON.stringify(answers);
+
+        const storageAnswers = localStorage.getItem('answers');
+        if (storageAnswers) {
+            localStorage.removeItem('answers');
+        }
+
+        localStorage.setItem('answers', answersString);
+        navigate('/Wynik');
+    }
 
     return (
         <section className="section ankieta" id="Ankieta">
@@ -198,15 +247,30 @@ const Form = () => {
                 <div className="stronicowanie">
                     {statements.map((_, i) => (
                         <button
-                            disabled={i > lastAnsweredStatement}
+                            disabled={i > farthestAnsweredStatementIndex}
                             className={
-                            `button__secondary${currentStatement.Index == i ? 'button__secondary_active' : ''} 
-                            ${ (i > lastAnsweredStatement) ? 'button__disabled' : ''}`}
+                                `button__secondary${currentStatement.Index == i ? 'button__secondary_active' : ''} 
+                            ${(i > farthestAnsweredStatementIndex) ? 'button__disabled' : ''}`}
                             onClick={() => handleStatementChange(i)}>
-                            {i+1}
+                            {i + 1}
                         </button>
                     ))}
-                    <Link to="/Wynik"><button className="button__secondary">Wynik</button></Link>
+                    <div>
+                        <button
+                            disabled={!hasUserAnsweredAllQuestions()}
+                            className={`button__secondary ${!hasUserAnsweredAllQuestions() ? 'button__disabled' : ''}`}
+                            onClick={handleOpenModal}>
+                            Wynik
+                        </button>
+                        {/*<ResultModal isOpen={isResultModalVisible} onClose={handleCloseModal}>*/}
+                        {/*    <Link to="/Wynik">*/}
+                        {/*        <button className="button__secondary">Zobacz swój wynik</button>*/}
+                        {/*    </Link>*/}
+                        {/*</ResultModal>*/}
+                        <ResultModal isOpen={isResultModalVisible} onClose={handleCloseModal}>
+                            <button className="button__secondary" onClick={() => handleShowResult()}>Zobacz swój wynik</button>
+                        </ResultModal>
+                    </div>
                 </div>
             </div>
         </section>
