@@ -25,7 +25,7 @@ const Form = () => {
     // clear vars after new question??
 
     useEffect(() => {
-        fetch('/stwierdzenia.csv')
+        fetch('/odpowiedzi-komitetow-przyklad-semicolon-separated.csv')
             .then(response => response.text())
             .then(csv => {
                 const lines = csv.split('\n');
@@ -35,7 +35,6 @@ const Form = () => {
                 const dataLength = dataWithoutHeader.length;
                 const statements: Statement[] = new Array(dataLength);
 
-
                 for (let index = 0; index < dataLength; index++) {
                     statements[index] = {
                         Index: index,
@@ -43,6 +42,8 @@ const Form = () => {
                         Explanation: dataWithoutHeader[index][1],
                     }
                 }
+                console.log(statements);
+
                 setStatements(statements);
                 setCurrentStatement(statements[0])
 

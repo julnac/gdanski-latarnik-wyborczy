@@ -47,7 +47,7 @@ const Wynik = () => {
         });
 
         // setAnswersValues(answersValues);
-
+        console.log(`answersValues: ${answersValues}`);
         return answersValues;
     }
 
@@ -61,67 +61,79 @@ const Wynik = () => {
         fetch('/odpowiedzi-komitetow-przyklad-semicolon-separated.csv')
             .then(response => response.text())
             .then(csv => {
-                const data = csv
-                    .split('\n')
-                    .map(line => line.split(';'));
+                const lines = csv.split('\n');
+                const completeData = lines.map(line => line.split(';'));
 
-                const committees = data[0].slice(numberOfColumnsToSkip);
+                const committees = completeData[0].slice(numberOfColumnsToSkip);
+                committeesCount = committees.length;
 
-                const dataWithoutHeader = data.slice(1);
-                dataLength = dataWithoutHeader.length;
-                committeesAnswers = new Array(dataLength);
+                const data = completeData.slice(1);
+                dataLength = data.length;
+                committeesAnswers = new Array(committeesCount);
 
-                for (let i = 0; i < dataLength; i++) {
-                    committeesAnswers[i] = dataWithoutHeader[i].slice(numberOfColumnsToSkip).map(Number);
+                console.log(`data[0].slice(numberOfColumnsToSkip).map(Number): ${data[0].slice(numberOfColumnsToSkip).map(Number)}`);
+
+                for (let i = 0; i < data[0].length; i++) {
+                    const committeeAnswers: number[] = new Array(dataLength);
+                    const column = data[i].slice(numberOfColumnsToSkip).map(Number);
+                    for (let j = 0; j < dataLength; j++) {
+                        committeeAnswers[j] = column[j];
+                    }
+                    committeesAnswers[i] = committeeAnswers;
                 }
 
-                committeesCount = committees.length;
-                setCommittees(committees);
+                console.log(`committeesAnswers: ${committeesAnswers}`);
 
-                console.log(committeesAnswers);
+                setCommittees(committees);
+            })
+            .then(() => {
+
+                let userAnswers: number[] = [];
+
+                const storageAnswersString = localStorage.getItem('answers');
+                if (storageAnswersString) {
+                    const parsedAnswers: Answer[] = JSON.parse(storageAnswersString);
+                    if (parsedAnswers.length !== dataLength) {
+                        navigate('/');
+                        // TODO: add popup
+                        return;
+                    }
+
+                    userAnswers = mapUserAnswersToValues(parsedAnswers);
+                }
+
+                // calculate user and committees answers similarity
+                const userSimilarityPerCommittee: number[] = new Array(committeesCount).fill(0);
+
+                for (let i = 0; i < committeesCount; i++) {
+                    for (let j = 0; j < userAnswers.length; j++) {
+                        if (userAnswers[j] !== 0) {
+                            if (userAnswers[j] === committeesAnswers[j][i]) {
+                                userSimilarityPerCommittee[i]++;
+                            }
+                            else if (userAnswers[j] === 1 && committeesAnswers[j][i] === 2) {
+                                userSimilarityPerCommittee[i] += 0.5;
+                            }
+                            else if (userAnswers[j] === 2 && committeesAnswers[j][i] === 1) {
+                                userSimilarityPerCommittee[i] += 0.5;
+                            }
+                            else if (userAnswers[j] === 3 && committeesAnswers[j][i] === 4) {
+                                userSimilarityPerCommittee[i] += 0.5;
+                            }
+                            else if (userAnswers[j] === 4 && committeesAnswers[j][i] === 3) {
+                                userSimilarityPerCommittee[i] += 0.5;
+                            }
+                        }
+                    }
+                    console.log(`committeesAnswers[j]: ${committeesAnswers[i]}`)
+                    userSimilarityPerCommittee[i] = userSimilarityPerCommittee[i] / userAnswers.length;
+                }
+                setUserSimilarityPerCommittee(userSimilarityPerCommittee);
+                console.log(`userSimilarityPerCommittee: ${userSimilarityPerCommittee}`);
             })
             .catch(error => console.error('Error fetching CSV file:', error));
 
-        let answersValues: number[] = [];
 
-        const storageAnswersString = localStorage.getItem('answers');
-        if (storageAnswersString) {
-            const parsedAnswers: Answer[] = JSON.parse(storageAnswersString);
-            if (parsedAnswers.length !== dataLength) {
-                navigate('/');
-                // TODO: add popup
-                return;
-            }
-
-            answersValues = mapUserAnswersToValues(parsedAnswers);
-        }
-
-        // calculate user and committees answers similarity
-        const userSimilarityPerCommittee: number[] = new Array(committeesCount).fill(0);
-
-        for (let i = 0; i < committeesCount; i++) {
-            for (let j = 0; j < answersValues.length; j++) {
-                if (answersValues[j] !== 0) {
-                    if (answersValues[j] === committeesAnswers[j][i]) {
-                        userSimilarityPerCommittee[i]++;
-                    }
-                    else if (answersValues[j] === 1 && committeesAnswers[j][i] === 2) {
-                        userSimilarityPerCommittee[i] += 0.5;
-                    }
-                    else if (answersValues[j] === 2 && committeesAnswers[j][i] === 1) {
-                        userSimilarityPerCommittee[i] += 0.5;
-                    }
-                    else if (answersValues[j] === 3 && committeesAnswers[j][i] === 4) {
-                        userSimilarityPerCommittee[i] += 0.5;
-                    }
-                    else if (answersValues[j] === 4 && committeesAnswers[j][i] === 3) {
-                        userSimilarityPerCommittee[i] += 0.5;
-                    }
-                }
-            }
-            userSimilarityPerCommittee[i] = userSimilarityPerCommittee[i] / answersValues.length;
-        }
-        setUserSimilarityPerCommittee(userSimilarityPerCommittee);
 
     }, [navigate]);
 
