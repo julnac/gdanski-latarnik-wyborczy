@@ -69,17 +69,17 @@ const Wynik = () => {
 
                 const data = completeData.slice(1);
                 dataLength = data.length;
+
                 committeesAnswers = new Array(committeesCount);
+                for (let i = 0; i < committeesCount; i++) {
+                    committeesAnswers[i] = new Array(dataLength);
+                }
 
-                console.log(`data[0].slice(numberOfColumnsToSkip).map(Number): ${data[0].slice(numberOfColumnsToSkip).map(Number)}`);
-
-                for (let i = 0; i < data[0].length; i++) {
-                    const committeeAnswers: number[] = new Array(dataLength);
-                    const column = data[i].slice(numberOfColumnsToSkip).map(Number);
-                    for (let j = 0; j < dataLength; j++) {
-                        committeeAnswers[j] = column[j];
+                for (let i = 0; i < dataLength; i++) {
+                    const row = data[i].slice(numberOfColumnsToSkip).map(Number);
+                    for (let j = 0; j < committeesCount; j++) {
+                        committeesAnswers[j][i] = row[j];
                     }
-                    committeesAnswers[i] = committeeAnswers;
                 }
 
                 console.log(`committeesAnswers: ${committeesAnswers}`);
@@ -108,25 +108,24 @@ const Wynik = () => {
                 for (let i = 0; i < committeesCount; i++) {
                     for (let j = 0; j < userAnswers.length; j++) {
                         if (userAnswers[j] !== 0) {
-                            if (userAnswers[j] === committeesAnswers[j][i]) {
+                            if (userAnswers[j] === committeesAnswers[i][j]) {
                                 userSimilarityPerCommittee[i]++;
                             }
-                            else if (userAnswers[j] === 1 && committeesAnswers[j][i] === 2) {
+                            else if (userAnswers[j] === 1 && committeesAnswers[i][j] === 2) {
                                 userSimilarityPerCommittee[i] += 0.5;
                             }
-                            else if (userAnswers[j] === 2 && committeesAnswers[j][i] === 1) {
+                            else if (userAnswers[j] === 2 && committeesAnswers[i][j] === 1) {
                                 userSimilarityPerCommittee[i] += 0.5;
                             }
-                            else if (userAnswers[j] === 3 && committeesAnswers[j][i] === 4) {
+                            else if (userAnswers[j] === 3 && committeesAnswers[i][j] === 4) {
                                 userSimilarityPerCommittee[i] += 0.5;
                             }
-                            else if (userAnswers[j] === 4 && committeesAnswers[j][i] === 3) {
+                            else if (userAnswers[j] === 4 && committeesAnswers[i][j] === 3) {
                                 userSimilarityPerCommittee[i] += 0.5;
                             }
                         }
                     }
-                    console.log(`committeesAnswers[j]: ${committeesAnswers[i]}`)
-                    userSimilarityPerCommittee[i] = userSimilarityPerCommittee[i] / userAnswers.length;
+                    userSimilarityPerCommittee[i] = Number((userSimilarityPerCommittee[i] / userAnswers.length).toFixed());
                 }
                 setUserSimilarityPerCommittee(userSimilarityPerCommittee);
                 console.log(`userSimilarityPerCommittee: ${userSimilarityPerCommittee}`);
@@ -145,7 +144,7 @@ const Wynik = () => {
                 </div>
                 <Link to="/"><button className="button">Wróć do strony</button></Link>
             </div>
-            <div>
+            <div style={{marginTop: '100px'}}>
                 <ResultChart
                     values={userSimilarityPerCommittee}
                     labels={committees} />
