@@ -58,7 +58,12 @@ const Wynik = () => {
         let committeesAnswers: number[][] = [];
         let dataLength = 0;
 
-        fetch('/odpowiedzi-komitetow-przyklad-semicolon-separated.csv')
+        const uri = (import.meta.env.MODE === undefined ? 'https://julnac.github.io/gdanski-latarnik-wyborczy/' : '') + 
+        'odpowiedzi-komitetow-przyklad-semicolon-separated.csv';
+
+        console.log(`uri: ${uri}`);
+
+        fetch(uri)
             .then(response => response.text())
             .then(csv => {
                 const lines = csv.split('\n');
