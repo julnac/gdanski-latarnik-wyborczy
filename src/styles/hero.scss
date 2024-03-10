@@ -1,13 +1,30 @@
 .hero{
     background-color: var(--body-color-light);
-}
-.hero__info{
-    grid-column: 2/7;
-}
-h1{
-    font-weight: var(--font-medium);
-    span{
-        font-style: italic;
-        font-size: var(--h1-font-size);
+    height: 100vh;
+    .hero__info{
+        grid-column: 2/7;
+        h1{
+            font-weight: var(--font-medium);
+            color: var(--akcent);
+            span{
+                font-style: italic;
+                font-size: var(--h1-font-size);
+            }
+        }
+        h3{
+            margin: 2rem 0;
+            color: var(--akcent);
+        }
+        .hero_button{
+            color: var(--akcent);
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            background-color: var(--body-color-light);
+            font-weight: var(--font-bold);
+            &:hover{
+                color: var(--text-color-dark);
+            }
+        }
     }
 }
+

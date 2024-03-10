@@ -1,6 +1,12 @@
 import "../styles/faq.scss";
 
 const Faq = () => {
+
+    // const [open, setOpen] = useState;
+    // const questions = []
+    // function handleClick(){
+
+    // }
     return (
         <section className="section faq" id="Faq">
             <div className="faq__tytul">
