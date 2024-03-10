@@ -5,10 +5,9 @@ import {useEffect, useState} from "react";
 import {StatementAnswer} from "../enums/StatementAnswer.tsx";
 import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 import ResultChart from "../components/ResultChart.tsx";
+import {handleScrollToSection} from "../scripts/utils.tsx";
 
 const Wynik = () => {
-    //
-    // const [answersValues, setAnswersValues] = useState<number[]>([]);
     const [committees, setCommittees] = useState<string[]>([]);
     const [userSimilarityPerCommittee, setUserSimilarityPerCommittee] = useState<number[]>([]);
 
@@ -106,6 +105,10 @@ const Wynik = () => {
 
                     userAnswers = mapUserAnswersToValues(parsedAnswers);
                 }
+                else {
+                    // TODO: add popup
+                    navigate('/');
+                }
 
                 // calculate user and committees answers similarity
                 const userSimilarityPerCommittee: number[] = new Array(committeesCount).fill(0);
@@ -114,7 +117,7 @@ const Wynik = () => {
                     for (let j = 0; j < userAnswers.length; j++) {
                         if (userAnswers[j] !== 0) {
                             if (userAnswers[j] === committeesAnswers[i][j]) {
-                                userSimilarityPerCommittee[i]++;
+                                userSimilarityPerCommittee[i] += 1;
                             }
                             else if (userAnswers[j] === 1 && committeesAnswers[i][j] === 2) {
                                 userSimilarityPerCommittee[i] += 0.5;
@@ -130,14 +133,12 @@ const Wynik = () => {
                             }
                         }
                     }
-                    userSimilarityPerCommittee[i] = Number((userSimilarityPerCommittee[i] / userAnswers.length).toFixed());
+                    userSimilarityPerCommittee[i] = Number((userSimilarityPerCommittee[i] / userAnswers.length).toFixed(2));
                 }
                 setUserSimilarityPerCommittee(userSimilarityPerCommittee);
                 console.log(`userSimilarityPerCommittee: ${userSimilarityPerCommittee}`);
             })
             .catch(error => console.error('Error fetching CSV file:', error));
-
-
 
     }, [navigate]);
 
@@ -145,9 +146,10 @@ const Wynik = () => {
         <section className="section wynik" id="Wynik">
             <div className="nawigacja">
                 <div className="logo">
-                    <a href="#Hero">Gdański Latarnik Wyborczy</a>
+                    <a onClick={() => handleScrollToSection("Hero")}>Gdański Latarnik Wyborczy</a>
                 </div>
-                <Link to="/"><button className="button">Wróć do strony</button></Link>
+                <Link to="/">
+                    <button className="button">Wróć do strony</button></Link>
             </div>
             <div style={{marginTop: '100px'}}>
                 <ResultChart

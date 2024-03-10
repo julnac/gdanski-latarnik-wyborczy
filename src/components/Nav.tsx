@@ -1,15 +1,9 @@
 import { Link } from "react-router-dom";
 import "../styles/nav.scss";
 import logo from "../assets/vote.png";
+import {handleScrollToSection} from "../scripts/utils.tsx";
 
 const Nav = () => {
-
-    const handleScrollToSection = (sectionId: string) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      };
 
     return (
         <nav id="nav">

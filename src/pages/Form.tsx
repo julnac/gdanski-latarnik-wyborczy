@@ -6,6 +6,7 @@ import {Answer} from "../models/Answer";
 import {StatementAnswer} from "../enums/StatementAnswer.tsx";
 import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 import ResultModal from "../components/ResultModal.tsx";
+import {handleScrollToSection} from "../scripts/utils.tsx";
 
 const Form = () => {
     const [statements, setStatements] = useState<Statement[]>([]);
@@ -180,9 +181,10 @@ const Form = () => {
         <section className="section ankieta" id="Ankieta">
             <div className="nawigacja">
                 <div className="logo">
-                    <a href="#Hero">Gdański Latarnik Wyborczy</a>
+                    <a onClick={() => handleScrollToSection("Hero")}>Gdański Latarnik Wyborczy</a>
                 </div>
-                <Link to="/"><button className="button">Wróć do strony</button></Link>
+                <Link to="/">
+                    <button className="button">Wróć do strony</button></Link>
             </div>
             <div className="ankieta__karuzela">
                 <div className="slajd">
