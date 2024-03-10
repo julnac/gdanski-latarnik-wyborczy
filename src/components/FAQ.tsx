@@ -1,6 +1,12 @@
 import "../styles/faq.scss";
 
 const Faq = () => {
+
+    // const [open, setOpen] = useState;
+    // const questions = []
+    // function handleClick(){
+
+    // }
     return (
         <section className="section faq" id="Faq">
             <div className="faq__tytul">
@@ -12,7 +18,7 @@ const Faq = () => {
                     <div className="pytanie">
                         <h3>Czym jest gdański latarnik wyborczy?</h3>
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 12H20M12 4V20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 12H20M12 4V20" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                     </div>
                     <div className="odpowiedz">
@@ -26,7 +32,7 @@ const Faq = () => {
                     <div className="pytanie">
                         <h3>Czym jest gdański latarnik wyborczy?</h3>
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 12H20M12 4V20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 12H20M12 4V20" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                     </div>
                     <div className="odpowiedz">

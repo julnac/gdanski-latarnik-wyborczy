@@ -2,16 +2,34 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 2rem 0 2rem;
-    position: sticky;
+    padding: .4rem 2rem;
+    position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     z-index: 1;
-    // .logo{}
-    ul{
-        display: inherit;
-        li{
-            padding: 0 1rem;
+    backdrop-filter: blur( 7.5px );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.07 );
+    .logo{
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        img{
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+    .options{
+        display: flex;
+        align-items: center;
+        ul{
+            display: inherit;
+            margin-right: 1rem;
+            li{
+                padding: 0 1rem;
+                text-transform: uppercase;
+            }
         }
     }
 }

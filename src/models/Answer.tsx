@@ -12,4 +12,11 @@ export class Answer {
     this.statementAnswer = statementAnswer;
     this.significanceAnswer = significanceAnswer;
   }
+
+    public isAnswered(): boolean {
+        return this.statementAnswer === StatementAnswer.Neutral ||
+            ((this.statementAnswer === StatementAnswer.Agree ||
+                this.statementAnswer === StatementAnswer.Disagree) &&
+                this.significanceAnswer !== SignificanceAnswer.Unselected);
+    }
 }
