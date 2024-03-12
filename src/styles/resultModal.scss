@@ -1,29 +1,35 @@
+.dark{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.178);
+}
 .modal {
   display: flex;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
-  width: 600px;
+  width: 700px;
   height: 300px;
-  position: absolute; /* Absolute positioning for centering */
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Center the modal content */
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10; /* Ensure modal is above other elements */
+  transform: translate(-50%, -50%);
+  background-color: var(--body-color-light);
+  border-radius: 1rem;
+  z-index: 10; 
 }
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-}
-
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
+  top: 2rem;
+  right: 2rem;
   cursor: pointer;
+  background-color: var(--body-color-light);
+  svg{
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: rotate(45deg);
+  }
 }

@@ -1,5 +1,6 @@
 import "../styles/kontakt.scss";
 import { Link } from "react-router-dom";
+import mewa from "../assets/mewa1.png";
 
 
 const Kontakt = () => {
@@ -10,6 +11,7 @@ const Kontakt = () => {
                 <h1>Kontakt</h1>
                 <Link to="/Form"><button className="button">Rozpocznij test</button></Link>
             </div>
+            <img className="mewa" src={mewa} alt="mewa"/>
             <footer>
                 <p>Info</p>
                 <p>Info prawne</p>

@@ -13,14 +13,18 @@ const ResultModal: React.FC<ResultModalProps> = ({ children, isOpen, onClose }) 
     }
 
     return (
-        <div className="modal">
-            <div>{children}</div>
-            <button className="button__secondary" onClick={onClose}>
-                Wróć do stwierdzeń
-            </button>
-            <button className="modal-close" onClick={onClose}>
-                Zamknij
-            </button>
+        <div className="dark">
+            <div className="modal">
+                <div>{children}</div>
+                <button className="button__secondary" onClick={onClose}>
+                    Wróć do stwierdzeń
+                </button>
+                <button className="modal-close" onClick={onClose}>
+                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 12H20M12 4V20" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     );
 };

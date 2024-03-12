@@ -3,16 +3,18 @@
     background-color: white;
     align-items: start;
     padding-top: 200px;
+    z-index: 1;
     .onas__tytul{
         grid-column: 2/6;
-        // h2{
-        //     color: var(--text-color-light);
-        // }
+
     }
     .onas__info{
         grid-column: 6/12;
-        // h3{
-        //     color: var(--text-color-light);
-        // }
+    }
+    .mewa{
+        width: 200px;
+        position: absolute;
+        top: 50vh;
+        left: 10vw;
     }
 }

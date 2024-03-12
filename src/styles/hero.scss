@@ -1,8 +1,10 @@
 .hero{
     background-color: var(--body-color-light);
-    height: 100vh;
+    height: 110vh;
     .hero__info{
         grid-column: 2/7;
+        transform: translateY(-40%);
+        z-index: 1;
         h1{
             font-weight: var(--font-medium);
             color: var(--akcent);
@@ -19,12 +21,24 @@
             color: var(--akcent);
             text-transform: uppercase;
             font-size: 1.5rem;
-            background-color: var(--body-color-light);
+            background-color: transparent;
             font-weight: var(--font-bold);
             &:hover{
                 color: var(--text-color-dark);
             }
         }
+    }
+    .hero__image{
+        grid-column: 7/12;
+        z-index: 1;
+    }
+    .light{
+        opacity: .2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 120vh;
     }
 }
 
