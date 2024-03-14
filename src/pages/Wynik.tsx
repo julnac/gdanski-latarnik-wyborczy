@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {StatementAnswer} from "../enums/StatementAnswer.tsx";
 import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 import ResultChart from "../components/ResultChart.tsx";
+import logo from "../assets/vote.png";
 
 const Wynik = () => {
     //
@@ -145,11 +146,12 @@ const Wynik = () => {
         <section className="section wynik" id="Wynik">
             <div className="nawigacja">
                 <div className="logo">
-                    <a href="#Hero">Gdański Latarnik Wyborczy</a>
+                    <img src={logo} alt="logo"/>
+                    <Link to="/"><a>Gdański Latarnik Wyborczy</a></Link>
                 </div>
                 <Link to="/"><button className="button">Wróć do strony</button></Link>
             </div>
-            <div style={{marginTop: '100px'}}>
+            <div className="chart">
                 <ResultChart
                     values={userSimilarityPerCommittee}
                     labels={committees} />

@@ -1,3 +1,4 @@
+import "../styles/resultChart.scss";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -35,7 +36,7 @@ const options = {
         },
         title: {
             display: true,
-            text: 'Chart.js Bar Chart',
+            text: '',
         },
         tooltip: {
             enabled: false
@@ -53,9 +54,7 @@ const options = {
             }
         },
         y: {
-            grid: {
-                display: false
-            }
+            display: false
         }
     }
 };
@@ -76,7 +75,7 @@ const ResultChart: React.FC<ResultChartProps> = ({values, labels}) => {
         ],
     };
 
-    return <Bar options={options} data={data} />;
+    return <Bar className="bar" options={options} data={data} />;
 }
 
 export default ResultChart;
