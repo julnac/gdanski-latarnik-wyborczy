@@ -24,10 +24,38 @@
             }
         }
     }
-    .chart{
+    .content{
         grid-column: 4/10;
         height: 100vh;
-        display: flex;
-        align-items: center;
+        padding-top: 20vh;
+        .header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .share{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                p{
+                    padding-right: .5rem;
+                    border-right: 1px solid var(--text-color-dark);
+                }
+                button{
+                    background-color: var(--body-color-light);
+                    img{
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        border-radius: .2rem;
+                    }
+                }
+            }
+        }
+        p{
+            margin: 1rem 0;
+        }
+        .chart{
+            width: 100%;
+        }
     }
+    
 }

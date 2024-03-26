@@ -42,3 +42,10 @@
         }
     }
 }
+@media screen and (max-width: 391px) {
+    .faq{
+        .faq__questions{
+            grid-column: 2/12;
+        }
+    }
+}

@@ -21,6 +21,11 @@ ChartJS.register(
     Datalabels
 );
 
+ChartJS.defaults.borderColor = 'rgba(0,0,0)';
+ChartJS.defaults.color = 'rgba(0,0,0)';
+ChartJS.defaults.font.size = 16;
+
+
 interface DatalabelsConfig {
     anchor: "center" | "end" | "start";
     align: 'top' | 'bottom' | 'center';
@@ -70,7 +75,7 @@ const ResultChart: React.FC<ResultChartProps> = ({values, labels}) => {
         datasets: [
             {
                 data: values,
-                backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                backgroundColor: 'rgba(250,105,80, 0.556)',
             }
         ],
     };

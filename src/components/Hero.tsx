@@ -50,7 +50,7 @@ const Hero = () => {
                     do kogo jest Ci najbliżej w wyborach
                     parlamentarnych 2023 roku.
                 </h3>
-                <Link to="/Form"><button className="hero_button">Rozpocznij test</button></Link>
+                <Link to="/Form"><button className="button__secondary">Rozpocznij test</button></Link>
             </div>
             <div className="hero__image">
                 <img src={lighthouse} alt="lighthouse"></img>

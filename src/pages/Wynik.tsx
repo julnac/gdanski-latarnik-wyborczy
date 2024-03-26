@@ -6,6 +6,15 @@ import {StatementAnswer} from "../enums/StatementAnswer.tsx";
 import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 import ResultChart from "../components/ResultChart.tsx";
 import logo from "../assets/vote.png";
+import x from "../assets/x.png"
+import li from "../assets/li.png"
+import faceb from "../assets/fb.png"
+
+const baseUrl: { [platform: string]: string } = {
+    facebook: "https://www.facebook.com/sharer/sharer.php?u=",
+    twitter: "https://twitter.com/intent/tweet?url=",
+    linkedin: "https://www.linkedin.com/sharing/share-offsite/?url=",
+};
 
 const Wynik = () => {
     //
@@ -142,6 +151,17 @@ const Wynik = () => {
 
     }, [navigate]);
 
+    function handleShare(platform: string) {
+        const url = "https://julnac.github.io/gdanski-latarnik-wyborczy/"; 
+
+        const shareUrl = `${baseUrl[platform]}${encodeURIComponent(url)}`;
+
+        console.log(shareUrl);
+
+        // small screens
+        window.open(shareUrl,"_blank",'width=500, height=500, scrollbars=yes, resizable=no');
+    }
+
     return (
         <section className="section wynik" id="Wynik">
             <div className="nawigacja">
@@ -151,12 +171,31 @@ const Wynik = () => {
                 </div>
                 <Link to="/"><button className="button">Wróć do strony</button></Link>
             </div>
-            <div className="chart">
+            <div className="content">
+                <div className="header">
+                    <h3>Wynik</h3>
+                    <div className="share">
+                        <p>Podaj dalej </p>
+                        <button onClick={() => handleShare("twitter")}>
+                            <img src={x} alt="x"/>
+                        </button>
+                        <button onClick={() => handleShare("linkedin")}>
+                            <img src={li} alt="li"/>
+                        </button>
+                        <button onClick={() => handleShare("facebook")}>
+                            <img src={faceb} alt="fb"/>
+                        </button>
+
+                        
+                    </div>
+                </div>
+                <p>Wykres przedstawia zgodność Twoich poglądów z deklaracjami poszczególnych komitetów wyborczych.</p>
+                <div className="chart">
                 <ResultChart
                     values={userSimilarityPerCommittee}
                     labels={committees} />
             </div>
-            <div className="ankieta__karuzela"></div>
+            </div>
         </section>
     )
 }
