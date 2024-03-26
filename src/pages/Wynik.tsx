@@ -17,8 +17,6 @@ const baseUrl: { [platform: string]: string } = {
 };
 
 const Wynik = () => {
-    //
-    // const [answersValues, setAnswersValues] = useState<number[]>([]);
     const [committees, setCommittees] = useState<string[]>([]);
     const [userSimilarityPerCommittee, setUserSimilarityPerCommittee] = useState<number[]>([]);
 
@@ -116,6 +114,10 @@ const Wynik = () => {
 
                     userAnswers = mapUserAnswersToValues(parsedAnswers);
                 }
+                else {
+                    // TODO: add popup
+                    navigate('/');
+                }
 
                 // calculate user and committees answers similarity
                 const userSimilarityPerCommittee: number[] = new Array(committeesCount).fill(0);
@@ -124,7 +126,7 @@ const Wynik = () => {
                     for (let j = 0; j < userAnswers.length; j++) {
                         if (userAnswers[j] !== 0) {
                             if (userAnswers[j] === committeesAnswers[i][j]) {
-                                userSimilarityPerCommittee[i]++;
+                                userSimilarityPerCommittee[i] += 1;
                             }
                             else if (userAnswers[j] === 1 && committeesAnswers[i][j] === 2) {
                                 userSimilarityPerCommittee[i] += 0.5;
@@ -140,14 +142,12 @@ const Wynik = () => {
                             }
                         }
                     }
-                    userSimilarityPerCommittee[i] = Number((userSimilarityPerCommittee[i] / userAnswers.length).toFixed());
+                    userSimilarityPerCommittee[i] = Number((userSimilarityPerCommittee[i] / userAnswers.length).toFixed(2));
                 }
                 setUserSimilarityPerCommittee(userSimilarityPerCommittee);
                 console.log(`userSimilarityPerCommittee: ${userSimilarityPerCommittee}`);
             })
             .catch(error => console.error('Error fetching CSV file:', error));
-
-
 
     }, [navigate]);
 
@@ -169,7 +169,8 @@ const Wynik = () => {
                     <img src={logo} alt="logo"/>
                     <Link to="/"><a>Gdański Latarnik Wyborczy</a></Link>
                 </div>
-                <Link to="/"><button className="button">Wróć do strony</button></Link>
+                <Link to="/">
+                    <button className="button">Wróć do strony</button></Link>
             </div>
             <div className="content">
                 <div className="header">

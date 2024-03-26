@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import "../styles/nav.scss";
 import logo from "../assets/vote.png";
 import { useState } from "react";
-// import logo from "../assets/vote2.png";
 
 const Nav = () => {
 
@@ -15,7 +14,6 @@ const Nav = () => {
         }
     };
 
-    // if window.width >
     const handleMenuOpen = () => {
         setMenuOpen(!menuOpen)
     }

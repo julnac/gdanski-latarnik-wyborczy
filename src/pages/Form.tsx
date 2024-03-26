@@ -184,7 +184,8 @@ const Form = () => {
                     <img src={logo} alt="logo"/>
                     <Link to="/"><a>Gdański Latarnik Wyborczy</a></Link>
                 </div>
-                <Link to="/"><button className="button">Wróć do strony</button></Link>
+                <Link to="/">
+                    <button className="button">Wróć do strony</button></Link>
             </div>
             <div className="ankieta__karuzela">
                 <div className="slajd">
