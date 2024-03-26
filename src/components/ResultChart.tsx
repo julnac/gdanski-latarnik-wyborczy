@@ -1,3 +1,4 @@
+import "../styles/resultChart.scss";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -20,6 +21,11 @@ ChartJS.register(
     Datalabels
 );
 
+ChartJS.defaults.borderColor = 'rgba(0,0,0)';
+ChartJS.defaults.color = 'rgba(0,0,0)';
+ChartJS.defaults.font.size = 16;
+
+
 interface DatalabelsConfig {
     anchor: "center" | "end" | "start";
     align: 'top' | 'bottom' | 'center';
@@ -35,7 +41,7 @@ const options = {
         },
         title: {
             display: true,
-            text: 'Chart.js Bar Chart',
+            text: '',
         },
         tooltip: {
             enabled: false
@@ -53,9 +59,7 @@ const options = {
             }
         },
         y: {
-            grid: {
-                display: false
-            }
+            display: false
         }
     }
 };
@@ -71,12 +75,12 @@ const ResultChart: React.FC<ResultChartProps> = ({values, labels}) => {
         datasets: [
             {
                 data: values,
-                backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                backgroundColor: 'rgba(250,105,80, 0.556)',
             }
         ],
     };
 
-    return <Bar options={options} data={data} />;
+    return <Bar className="bar" options={options} data={data} />;
 }
 
 export default ResultChart;

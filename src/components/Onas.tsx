@@ -1,4 +1,5 @@
 import "../styles/onas.scss";
+import mewa from "../assets/mewa2.png";
 
 const Onas = () => {
     return (
@@ -14,6 +15,7 @@ const Onas = () => {
                     Illum modi cumque minima, eveniet molestiae voluptatum quisquam harum repellat! Iusto, voluptate?
                 </h3>
             </div>
+            <img className="mewa" src={mewa} alt="mewa"/>
         </section>
     )
 }

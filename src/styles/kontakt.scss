@@ -5,8 +5,17 @@
         color: var(--text-color-light);
 
     }
+    h1{
+        margin: 1rem 0;
+    }
     .kontakt__info{
         grid-column: 2/12;
+    }
+    .mewa{
+        width: 200px;
+        position: absolute;
+        bottom: 2rem;
+        right: 10vw;
     }
     footer{
         grid-column: 2/12;

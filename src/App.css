@@ -45,22 +45,32 @@
     --h3-font-size: 5rem;
 
   }
-}
+} */
 
 @media screen and (max-width: 992px) {
   :root {
     --h1-font-size: 3rem;
-    --h3-font-size: 3rem;
+    --h3-font-size: 1.2rem;
     --h2-font-size: 2rem;
+    --nav-font-size: 1rem;
   }
 }
 @media screen and (max-width: 576px) {
   :root {
     --h1-font-size: 2rem;
-    --h3-font-size: 2rem;
-    --h2-font-size: 1.2rem;
+    --h3-font-size: 1rem;
+    --h2-font-size: 1rem;
+    --nav-font-size: 1rem;
   }
-}  */
+} 
+@media screen and (max-width: 391px) {
+  :root {
+    --h1-font-size: 3rem;
+    --h3-font-size: 1rem;
+    --h2-font-size: 1rem;
+    --nav-font-size: 1rem;
+  }
+} 
 
 /* ========= BASE ========= */
 * {
@@ -225,6 +235,9 @@ button[disabled]{
 /* For large devices */
 @media screen and (max-width: 992px) {
   .button{
+    padding: .7rem 1.75rem;
+  }
+  .button__secondary{
     padding: .7rem 1.75rem;
   }
 }

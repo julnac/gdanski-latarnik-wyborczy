@@ -6,7 +6,7 @@ import {Answer} from "../models/Answer";
 import {StatementAnswer} from "../enums/StatementAnswer.tsx";
 import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 import ResultModal from "../components/ResultModal.tsx";
-import {handleScrollToSection} from "../scripts/utils.tsx";
+import logo from "../assets/vote.png";
 
 const Form = () => {
     const [statements, setStatements] = useState<Statement[]>([]);
@@ -181,7 +181,8 @@ const Form = () => {
         <section className="section ankieta" id="Ankieta">
             <div className="nawigacja">
                 <div className="logo">
-                    <a onClick={() => handleScrollToSection("Hero")}>Gdański Latarnik Wyborczy</a>
+                    <img src={logo} alt="logo"/>
+                    <Link to="/"><a>Gdański Latarnik Wyborczy</a></Link>
                 </div>
                 <Link to="/">
                     <button className="button">Wróć do strony</button></Link>
@@ -252,13 +253,14 @@ const Form = () => {
                     </div>
                     : <></>}
                 </div>
-                <div className="stronicowanie">
+                <div className="statement_legend">
                     {statements.map((_, i) => (
                         <button
+                            key={0}
                             disabled={i > farthestAnsweredStatementIndex}
                             className={
-                                `button__secondary${currentStatement.Index == i ? 'button__secondary_active' : ''} 
-                            ${(i > farthestAnsweredStatementIndex) ? 'button__disabled' : ''}`}
+                                `${currentStatement.Index == i ? 'statement_legend_current' : ''}
+                                ${(i > farthestAnsweredStatementIndex) ? 'statement_legend_unvisited' : 'statement_legend_visited'}`}
                             onClick={() => handleStatementChange(i)}>
                             {i + 1}
                         </button>
@@ -266,7 +268,7 @@ const Form = () => {
                     <div>
                         <button
                             disabled={!hasUserAnsweredAllQuestions()}
-                            className={`button__secondary ${!hasUserAnsweredAllQuestions() ? 'button__disabled' : ''}`}
+                            className={`statement_legend_unvisited ${hasUserAnsweredAllQuestions() ? 'statement_legend_visited' : ''}`}
                             onClick={handleOpenModal}>
                             Wynik
                         </button>
