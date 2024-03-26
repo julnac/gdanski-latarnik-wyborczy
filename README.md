@@ -1,30 +1,14 @@
-# React + TypeScript + Vite
+# Gdański latarnik wyborczy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Author: Julia NAczke, Grzegorz Pozorski 
+Date: December 2023 - present
 
-Currently, two official plugins are available:
+## Introduction
+The project was created at the request of the 'Gdańskie Forum Samorządowe' to create a survey for voters in local government elections in 2024. The survey compares the user's responses with the responses of election committees. The results are represented on a bar chart that indicates the percentage of agreement between views.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Live page](https://julnac.github.io/gdanski-latarnik-wyborczy/#/)
 
-## Expanding the ESLint configuration
+## Usage
+To run this project use 'npm run dev' command in terminal, and open a provided link in your browser. 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
