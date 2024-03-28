@@ -11,4 +11,7 @@ The project was created at the request of the 'Gdańskie Forum Samorządowe' to 
 ## Usage
 To run this project use 'npm run dev' command in terminal, and open a provided link in your browser. 
 
+![image](https://github.com/julnac/gdanski-latarnik-wyborczy/assets/112817385/0132d4cc-2c73-4968-9af2-66a1fd21180c)
+
+
 
