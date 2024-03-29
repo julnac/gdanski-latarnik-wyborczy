@@ -12,6 +12,9 @@ const Nav = () => {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
+        if(menuOpen) {
+            setMenuOpen(!menuOpen)
+        }
     };
 
     const handleMenuOpen = () => {

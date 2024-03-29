@@ -10,6 +10,9 @@
     }
     .onas__info{
         grid-column: 6/12;
+        h3{
+            line-height: 1.2;
+        }
     }
     .mewa{
         width: 200px;
@@ -23,3 +26,25 @@
         padding-top: 100px;
     }
 }
+  /* For small devices */
+  @media screen and (max-width: 413px) {
+    .onas{
+        align-content: start; 
+        gap: 2rem;
+        height: auto;
+        .onas__tytul{
+            grid-column: 2/12;
+        }
+        .onas__info{
+            grid-column: 2/12;
+        }
+        .mewa{
+            position: relative;
+            grid-column: 2/12;
+            top: 0;
+            left: 0;
+            width: 100px;
+        }
+    }
+
+  }

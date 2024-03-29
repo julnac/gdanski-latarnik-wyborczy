@@ -16,6 +16,7 @@
         h3{
             margin: 2rem 0;
             color: var(--akcent);
+            line-height: 1.2;
         }
         // .hero_button{
         //     color: var(--akcent);
@@ -50,9 +51,9 @@
 @media screen and (max-width: 992px) {
     .hero{
         height: 90vh;
-        .hero__image{
-            // transform: scale(1.9);
-        }
+        // .hero__image{
+        //     // transform: scale(1.9);
+        // }
         .light{
             height: 90vh;
         }
@@ -62,57 +63,51 @@
   /* For medium devices */
   @media screen and (max-width: 768px) {
     .hero{
-        .hero__image{
-            // transform: scale(1.6);
-        }
+        // .hero__image{
+        //     // transform: scale(1.6);
+        // }
         .light{
             display: none;
         }
     }
   }
   
-@media screen and (max-width: 576px) {
-    .hero{
-        .hero__image{
-            // transform: scale(2) translateY(10%);
-        }
-        .light{
-            display: none;
-        }
-    }
-} 
+// @media screen and (max-width: 576px) {
+//     .hero{
+//         // .hero__image{
+//         //     // transform: scale(2) translateY(10%);
+//         // }
+//     }
+// } 
   /* For small devices */
-  @media screen and (max-width: 391px) {
+  @media screen and (max-width: 413px) {
     .hero{
-        align-items: end;
+        align-items: baseline;
+        height: 80vh;
         .hero__info{
+            position: absolute;
+            right: 0;
+            left: 0;
+            bottom: -35px;
             border-radius: 1rem 1rem 0 0;
             grid-column: 1/13;
-            padding: 2rem;
-            transform: translateY(15%);
-            z-index: 10;
+            padding: 3rem 2rem;
+            z-index: 3;
             text-align: center;
             backdrop-filter: blur( 30px );
-            box-shadow: 0 -8px 32px 0 rgba( 31, 38, 135, 0.2 );
-            // h1,h3 {
-            //     color: var(--text-color-dark);
-            // }
+            box-shadow: 0 -8px 32px 0 rgba( 31, 38, 135, 0.1 );
             .button__secondary{
                 background-color: var(--akcent);
                 color: var(--text-color-light);
             }
         }
         .hero__image{
-            grid-column: 2/12;
-            // position: absolute;
-            // bottom: 0;
-            // left: 0;
-            // right: 0;
-            // transform: scale(3) translateY(-5%);
-            // overflow: hidden;
+            grid-column: 1/13;
         }
         .light{
-            display: none;
+            display: block;
+            height: 80vh;
+            transform: scale(0.5) translate(-300px, -250px);
         }
     }
   }

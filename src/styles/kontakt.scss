@@ -3,10 +3,12 @@
     padding-bottom: 0;
     h1, h2, h3, p{
         color: var(--text-color-light);
-
     }
-    h1{
-        margin: 1rem 0;
+    p{
+        margin: .7rem 0;
+    }
+    h2{
+        margin-bottom: 3rem;
     }
     .kontakt__info{
         grid-column: 2/12;
@@ -24,5 +26,20 @@
         align-items: center;
         gap: 2rem;
         padding: 1rem 0;
+        p{
+            margin: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 413px) {
+    .kontakt{
+        .mewa{
+            width: 150px;
+            right: 1.5rem;
+        }
+        footer{
+            margin-top: 3rem;
+        }
     }
 }

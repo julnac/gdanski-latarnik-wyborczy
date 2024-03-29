@@ -132,3 +132,30 @@
         }
     }
 }
+ /* For small devices */
+ @media screen and (max-width: 413px) {
+    .ankieta{
+        .ankieta__karuzela{
+            .slajd{
+                .noglowek{
+                    flex-direction: column;
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                    .tytul{
+                        h3{
+                            font-weight: var(--font-bold);
+                        }
+                    }
+                }
+                .slajd__stwierdzenie{
+                    text-align: center;
+                    margin: 2rem auto;
+                    width: auto;
+                }
+                .slajd__odpowiedzi{
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+ }

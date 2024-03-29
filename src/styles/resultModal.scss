@@ -33,3 +33,10 @@
     transform: rotate(45deg);
   }
 }
+ /* For small devices */
+ @media screen and (max-width: 413px) {
+    .modal{
+      width: 300px;
+      flex-direction: column;
+    }
+ }

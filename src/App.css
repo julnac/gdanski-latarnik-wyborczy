@@ -63,10 +63,10 @@
     --nav-font-size: 1rem;
   }
 } 
-@media screen and (max-width: 391px) {
+@media screen and (max-width: 413px) {
   :root {
     --h1-font-size: 3rem;
-    --h3-font-size: 1rem;
+    --h3-font-size: 1.2rem;
     --h2-font-size: 1rem;
     --nav-font-size: 1rem;
   }
@@ -253,6 +253,8 @@ button[disabled]{
   
 }  */
 /* For small devices */
-@media screen and (max-width: 350px) {
-
-}
+/* @media screen and (max-width: 413px) {
+  h3 {
+    font-weight: var(--font-bold);
+  }
+} */

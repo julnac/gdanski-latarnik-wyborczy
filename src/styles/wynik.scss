@@ -59,3 +59,18 @@
     }
     
 }
+ /* For small devices */
+ @media screen and (max-width: 413px) {
+    .wynik{
+        .content{
+            grid-column: 2/12;
+            height: 100vh;
+            padding-top: 20vh;
+            .header{
+                h3{
+                    font-weight: var(--font-bold);
+                }
+            }
+        }
+    }
+ }
