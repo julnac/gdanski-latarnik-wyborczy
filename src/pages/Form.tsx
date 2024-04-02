@@ -26,8 +26,8 @@ const Form = () => {
     // clear vars after new question??
 
     useEffect(() => {
-        const uri = (import.meta.env.MODE === undefined ? 'https://julnac.github.io/gdanski-latarnik-wyborczy/' : '') + 
-        'odpowiedzi-komitetow-przyklad-semicolon-separated.csv';
+        const uri = (import.meta.env.MODE === undefined ? 'https://gdanskilatarnik.pl/' : '') + 
+        'odpowiedzi-komitetow-semicolon-separated.csv';
 
         console.log(`uri: ${uri}`);
 

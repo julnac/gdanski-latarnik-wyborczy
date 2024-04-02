@@ -49,13 +49,19 @@ const options = {
         datalabels: {
             anchor: 'end',
             align: 'top',
-            formatter: (value:number) => (value*100).toString() + '%',
+            formatter: (value:number) => (value*100).toString().slice(0, 2) + '%',
         } as DatalabelsConfig,
     },
     scales: {
+
         x: {
             grid: {
                 display: false
+            },
+            ticks: {
+                autoSkip: false,
+                maxRotation: 30,
+                minRotation: 45
             }
         },
         y: {

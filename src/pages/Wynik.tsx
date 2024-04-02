@@ -66,8 +66,8 @@ const Wynik = () => {
         let committeesAnswers: number[][] = [];
         let dataLength = 0;
 
-        const uri = (import.meta.env.MODE === undefined ? 'https://julnac.github.io/gdanski-latarnik-wyborczy/' : '') + 
-        'odpowiedzi-komitetow-przyklad-semicolon-separated.csv';
+        const uri = (import.meta.env.MODE === undefined ? 'https://gdanskilatarnik.pl/' : '') + 
+        'odpowiedzi-komitetow-semicolon-separated.csv';
 
         console.log(`uri: ${uri}`);
 
@@ -124,7 +124,7 @@ const Wynik = () => {
 
                 for (let i = 0; i < committeesCount; i++) {
                     for (let j = 0; j < userAnswers.length; j++) {
-                        if (userAnswers[j] !== 0) {
+                        if (userAnswers[j] !== 0 && committeesAnswers[i][j] !== 0) {
                             if (userAnswers[j] === committeesAnswers[i][j]) {
                                 userSimilarityPerCommittee[i] += 1;
                             }
@@ -152,7 +152,7 @@ const Wynik = () => {
     }, [navigate]);
 
     function handleShare(platform: string) {
-        const url = "https://julnac.github.io/gdanski-latarnik-wyborczy/"; 
+        const url = "https://gdanskilatarnik.pl/"; 
 
         const shareUrl = `${baseUrl[platform]}${encodeURIComponent(url)}`;
 

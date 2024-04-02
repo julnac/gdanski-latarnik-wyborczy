@@ -6,5 +6,5 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
-  base: 'https://julnac.github.io/gdanski-latarnik-wyborczy/'
+  base: 'https://gdanskilatarnik.pl/'
 })
