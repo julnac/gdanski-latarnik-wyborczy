@@ -58,7 +58,7 @@ const Form = () => {
                         setAnswers(Array(dataLength).fill(new Answer()));
                         return;
                     }
-                    const storageAnswers = parsedAnswers.map((answer) => new Answer(answer.statementAnswer, answer.significanceAnswer));
+                    const storageAnswers = parsedAnswers.map((answer) => new Answer(answer.statementAnswer));
                     setAnswers(storageAnswers);
                     setFarthestAnsweredStatementIndex(storageAnswers.length - 1);
                     setCurrentStatement(statements[0]);
@@ -110,6 +110,7 @@ const Form = () => {
 
     const handleStatementButtonClick = (statementAnswer: StatementAnswer) => {
         setStatementAnswer(statementAnswer);
+
         const answer = new Answer(statementAnswer);
         setAnswer(currentStatement.Index, answer);
 
@@ -179,13 +180,13 @@ const Form = () => {
                             id="agreeButton"
                             className={`button__secondary ${statementAnswer === StatementAnswer.Agree ? 'button__secondary_active' : ''}`}
                             onClick={() => handleStatementButtonClick(StatementAnswer.Agree)}>
-                            Zgadzam się
+                            Tak
                         </button>
                         <button
                             id="disagreeButton"
                             className={`button__secondary ${statementAnswer === StatementAnswer.Disagree ? 'button__secondary_active' : ''}`}
                             onClick={() => handleStatementButtonClick(StatementAnswer.Disagree)}>
-                            nie zgadzam się
+                            Nie
                         </button>
                         <button
                             id="doNotKnowButton"
