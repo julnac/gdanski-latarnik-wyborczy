@@ -54,10 +54,33 @@ const Faq = () => {
                             }
                         </div>
                         <div className={isVisible[3] ? "answer" : "hidden"}>
-                            <p>Latarnik działa na podstawie algorytmu, który oblicza zgodność odpowiedzi 
-                                użytkownika z odpowiedziami komitetów wyborczych. Np. jeżeli użytkownik w pierszym
-                                pytaniu wybrał że się zgadza, a w drugim że się nie zgadza, a z kolei komitet 
-                                odpowiedział dwa razy że się nie zgadza, to użytkownik ma 50% zgodność z komitetem.
+                            <p>Latarnik działa na podstawie algorytmu, który oblicza zgodność odpowiedzi użytkownika z 
+                                odpowiedziami komitetów wyborczych. Na przykład jeżeli użytkownik w pierwszym pytaniu 
+                                odpowiedział twierdząco na jedno z pytań, w drugim nie zgadza się z zawartym w nim stwierdzeniem, 
+                                a komitet odpowiedział w obu przypadkach "tak", to użytkownik ma 50% zgodności z komitetem.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="item">
+                    <div className="question">
+                        <div onClick={() => handleClick(3)}>
+                            <h3>Czy w Latarniku zostały uwzględnione wszystkie komitety wyborcze?</h3>
+                            {isVisible[3] ? 
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 12L18 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg> :
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 12H20M12 4V20" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            }
+                        </div>
+                        <div className={isVisible[3] ? "answer" : "hidden"}>
+                            <p>Tak, w Latarniku uwzględniono wszystkie komitety wyborcze, które wystawiły swoich kandydatów 
+                                w wyborach samorządowych w Gdańsku. Wyjątkiem jest KW Związku Słowiańskiego, który nie odesłał 
+                                uzupełnionego kwestionariusza. Nasza przedstawicielka kontaktowała się z prezesem partii 
+                                dwukrotnie drogą telefoniczną, a następnie wysłała maila z kwestionariuszem do osoby wskazanej 
+                                przez prezesa. Do dnia 3 kwietnia niestety nie doczekaliśmy się odpowiedzi.
                             </p>
                         </div>
                     </div>

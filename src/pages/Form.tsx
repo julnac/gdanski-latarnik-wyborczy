@@ -154,7 +154,7 @@ const Form = () => {
             <div className="ankieta__karuzela">
                 <div className="slajd">
                     <div className="noglowek">
-                        <div className="tytul"><h3>Stwierdzenie: {currentStatement ? currentStatement.Index + 1 : 'Loading...'}</h3></div>
+                        <div className="tytul"><h3>Pytanie: {currentStatement ? currentStatement.Index + 1 : 'Loading...'}</h3></div>
                         {/* <div className="wyjasnienie">
                             <button onClick={handleExplanationOpen}>Wyjaśnienie stwierdzenia</button>
                             {isExplanationVisible ?
