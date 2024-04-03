@@ -1,0 +1,148 @@
+.ankieta {
+  margin: 0;
+  padding: 0;
+}
+.ankieta .nawigacja {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 1/13;
+  padding: 0.4rem 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+.ankieta .nawigacja .logo {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ankieta .nawigacja .logo img {
+  width: 2rem;
+  height: 2rem;
+}
+.ankieta .ankieta__karuzela {
+  grid-column: 2/12;
+  height: 100vh;
+}
+.ankieta .ankieta__karuzela .slajd {
+  padding-top: 20vh;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+.ankieta .ankieta__karuzela .slajd .noglowek {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.ankieta .ankieta__karuzela .slajd .noglowek .wyjasnienie button {
+  background-color: var(--body-color-light);
+  text-transform: uppercase;
+  border-bottom: solid 1px;
+}
+.ankieta .ankieta__karuzela .slajd .noglowek .wyjasnienie button:hover {
+  color: var(--dark-grey);
+}
+.ankieta .ankieta__karuzela .slajd .noglowek .wyjasnienie .dark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.178);
+}
+.ankieta .ankieta__karuzela .slajd .noglowek .wyjasnienie .dark .pop-out {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 400px;
+  z-index: 100;
+  background-color: var(--body-color-light);
+  border-radius: 1rem;
+  padding: 4rem;
+}
+.ankieta .ankieta__karuzela .slajd .noglowek .wyjasnienie .dark .pop-out p {
+  margin: 1rem;
+}
+.ankieta .ankieta__karuzela .slajd .noglowek .wyjasnienie .dark .pop-out .close {
+  width: 100%;
+  text-align: right;
+}
+.ankieta .ankieta__karuzela .slajd .noglowek .wyjasnienie .dark .pop-out .close svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  transform: rotate(45deg);
+}
+.ankieta .ankieta__karuzela .slajd .slajd__stwierdzenie {
+  text-align: center;
+  margin: 2rem auto;
+  width: 900px;
+}
+.ankieta .ankieta__karuzela .slajd .slajd__odpowiedzi {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.ankieta .ankieta__karuzela .slajd .slajd__odpowiedzi .black-button {
+  background-color: black;
+}
+.ankieta .ankieta__karuzela .slajd .slajd__waga .slajd__waga-pytanie {
+  text-align: center;
+}
+.ankieta .ankieta__karuzela .slajd .slajd__waga .slajd__waga-odpowiedzi {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.ankieta .ankieta__karuzela .statement_legend {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ankieta .ankieta__karuzela .statement_legend .statement_legend_unvisited {
+  background-color: var(--body-color-light);
+  padding: 0.7rem;
+  color: var(--dark-grey);
+}
+.ankieta .ankieta__karuzela .statement_legend .statement_legend_visited {
+  background-color: var(--body-color-light);
+  padding: 0.7rem;
+  color: var(--text-color-dark);
+}
+.ankieta .ankieta__karuzela .statement_legend .statement_legend_current {
+  border: solid 2px var(--akcent);
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  color: var(--text-color-dark);
+}
+
+/* For small devices */
+@media screen and (max-width: 413px) {
+  .ankieta .ankieta__karuzela .slajd .noglowek {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .ankieta .ankieta__karuzela .slajd .noglowek .tytul h3 {
+    font-weight: var(--font-bold);
+  }
+  .ankieta .ankieta__karuzela .slajd .slajd__stwierdzenie {
+    text-align: center;
+    margin: 2rem auto;
+    width: auto;
+  }
+  .ankieta .ankieta__karuzela .slajd .slajd__odpowiedzi {
+    flex-direction: column;
+  }
+}/*# sourceMappingURL=form.css.map */

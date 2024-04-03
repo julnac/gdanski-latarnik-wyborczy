@@ -1,0 +1,73 @@
+.wynik {
+  margin: 0;
+  padding: 0;
+}
+.wynik .nawigacja {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  -webkit-backdrop-filter: blur(7.5px);
+          backdrop-filter: blur(7.5px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+.wynik .nawigacja .logo {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.wynik .nawigacja .logo img {
+  width: 2rem;
+  height: 2rem;
+}
+.wynik .content {
+  grid-column: 4/10;
+  height: 100vh;
+  padding-top: 20vh;
+}
+.wynik .content .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wynik .content .header .share {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.wynik .content .header .share p {
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--text-color-dark);
+}
+.wynik .content .header .share button {
+  background-color: var(--body-color-light);
+}
+.wynik .content .header .share button img {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 0.2rem;
+}
+.wynik .content p {
+  margin: 1rem 0;
+}
+.wynik .content .chart {
+  width: 100%;
+}
+
+/* For small devices */
+@media screen and (max-width: 413px) {
+  .wynik .content {
+    grid-column: 2/12;
+    height: 100vh;
+    padding-top: 20vh;
+  }
+  .wynik .content .header h3 {
+    font-weight: var(--font-bold);
+  }
+}/*# sourceMappingURL=wynik.css.map */

@@ -11,7 +11,11 @@
         margin-bottom: 3rem;
     }
     .kontakt__info{
-        grid-column: 2/12;
+        grid-column: 2/5;
+    }
+    .kontakt__logo{
+        grid-column: 5/12;
+        width: 200px;
     }
     .mewa{
         width: 200px;
@@ -34,6 +38,12 @@
 
 @media screen and (max-width: 413px) {
     .kontakt{
+        .kontakt__info{
+            grid-column: 2/12;
+        }
+        .kontakt__logo{
+            grid-column: 2/12;
+        }
         .mewa{
             width: 150px;
             right: 1.5rem;

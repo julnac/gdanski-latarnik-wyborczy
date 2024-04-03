@@ -1,0 +1,43 @@
+.kontakt {
+  background-color: var(--body-color-dark);
+  padding-bottom: 0;
+}
+.kontakt h1, .kontakt h2, .kontakt h3, .kontakt p {
+  color: var(--text-color-light);
+}
+.kontakt p {
+  margin: 0.7rem 0;
+}
+.kontakt h2 {
+  margin-bottom: 3rem;
+}
+.kontakt .kontakt__info {
+  grid-column: 2/12;
+}
+.kontakt .mewa {
+  width: 200px;
+  position: absolute;
+  bottom: 2rem;
+  right: 10vw;
+}
+.kontakt footer {
+  grid-column: 2/12;
+  display: flex;
+  border-top: 1px solid var(--text-color-light);
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+.kontakt footer p {
+  margin: 0;
+}
+
+@media screen and (max-width: 413px) {
+  .kontakt .mewa {
+    width: 150px;
+    right: 1.5rem;
+  }
+  .kontakt footer {
+    margin-top: 3rem;
+  }
+}/*# sourceMappingURL=kontakt.css.map */

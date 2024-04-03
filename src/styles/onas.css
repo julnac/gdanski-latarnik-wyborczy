@@ -1,0 +1,49 @@
+.onas {
+  height: 100vh;
+  background-color: white;
+  align-items: start;
+  padding-top: 200px;
+  z-index: 1;
+}
+.onas .onas__tytul {
+  grid-column: 2/6;
+}
+.onas .onas__info {
+  grid-column: 6/12;
+}
+.onas .onas__info h3 {
+  line-height: 1.2;
+}
+.onas .mewa {
+  width: 200px;
+  position: absolute;
+  top: 50vh;
+  left: 10vw;
+}
+
+@media screen and (max-width: 768px) {
+  .onas {
+    padding-top: 100px;
+  }
+}
+/* For small devices */
+@media screen and (max-width: 413px) {
+  .onas {
+    align-content: start;
+    gap: 2rem;
+    height: auto;
+  }
+  .onas .onas__tytul {
+    grid-column: 2/12;
+  }
+  .onas .onas__info {
+    grid-column: 2/12;
+  }
+  .onas .mewa {
+    position: relative;
+    grid-column: 2/12;
+    top: 0;
+    left: 0;
+    width: 100px;
+  }
+}/*# sourceMappingURL=onas.css.map */

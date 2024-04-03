@@ -1,6 +1,6 @@
 import "../styles/hero.scss";
 import { Link } from "react-router-dom";
-import lighthouse from "../assets/lighthouse.png"
+// import lighthouse from "../assets/lighthouse.png"
 import { useState } from "react";
 import * as images from '../assets/lights_img';
 // import imgs from '../assets/lights';
@@ -44,17 +44,17 @@ const Hero = () => {
     return (
         <section className="section hero" id="Hero">
             <div className="hero__info">
-                <h1><span>Sprawdź <br/></span>Swoje Poglądy</h1>
+                <h1>Wybierz świadomie </h1>
 
-                <h3> Odpowiedz na kilka pytań i przekonaj się,
-                    do kogo jest Ci najbliżej w wyborach
-                    parlamentarnych 2023 roku.
+                <h3> Odpowiedz na pytania i przekonaj się, 
+                    do kogo jest Ci najbliżej w gdańskich wyborach 
+                    samorządowych w 2024 roku.
                 </h3>
                 <Link to="/Form"><button className="button__secondary">Rozpocznij test</button></Link>
             </div>
-            <div className="hero__image">
+            {/* <div className="hero__image">
                 <img src={lighthouse} alt="lighthouse"></img>
-            </div>
+            </div> */}
             <img className="light" src={currentImage} alt="light" />
 
             {/* <img className="light" key={index} src={image} alt="light"></img> */}

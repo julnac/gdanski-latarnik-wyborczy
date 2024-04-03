@@ -1,5 +1,5 @@
 .faq{
-    gap:0;
+    gap:0 3rem;
     .faq__title{
         grid-column: 2/12;
         display: flex;
@@ -12,7 +12,6 @@
         grid-column: 6/12;
         display: grid;
         grid-template: 1fr;
-        margin-bottom: 100px;
         .item{
             cursor: pointer;
             border-bottom: 1px solid var(--text-color-dark);
@@ -36,6 +35,9 @@
                 }
                 .answer{
                     margin: 1rem 4rem 0 0;
+                    p{
+                        line-height: 120%;
+                    }
                 }
             }
             
@@ -45,6 +47,7 @@
 @media screen and (max-width: 413px) {
     .faq{
         height: auto;
+        gap:0;
         .faq__title{
             justify-content: space-between;
             padding: 2rem 0;

@@ -17,6 +17,7 @@
             margin: 2rem 0;
             color: var(--akcent);
             line-height: 1.2;
+            font-size: 1.5rem;
         }
         // .hero_button{
         //     color: var(--akcent);
@@ -32,12 +33,12 @@
             background-color: transparent;
         }
     }
-    .hero__image{
-        grid-column: 7/12;
-        z-index: 1;
-    }
+    // .hero__image{
+    //     grid-column: 7/12;
+    //     z-index: 1;
+    // }
     .light{
-        opacity: .2;
+        // opacity: .2;
         position: absolute;
         top: 0;
         left: 0;
@@ -51,9 +52,11 @@
 @media screen and (max-width: 992px) {
     .hero{
         height: 90vh;
-        // .hero__image{
-        //     // transform: scale(1.9);
-        // }
+        .hero-info{
+            h3{
+                font-size: var(--h3-font-size);
+            }
+        }
         .light{
             height: 90vh;
         }
@@ -61,16 +64,13 @@
   }
   
   /* For medium devices */
-  @media screen and (max-width: 768px) {
-    .hero{
-        // .hero__image{
-        //     // transform: scale(1.6);
-        // }
-        .light{
-            display: none;
-        }
-    }
-  }
+//   @media screen and (max-width: 768px) {
+//     .hero{
+//         .light{
+//             display: none;
+//         }
+//     }
+//   }
   
 // @media screen and (max-width: 576px) {
 //     .hero{
@@ -101,13 +101,10 @@
                 color: var(--text-color-light);
             }
         }
-        .hero__image{
-            grid-column: 1/13;
-        }
         .light{
-            display: block;
+            // display: block;
             height: 80vh;
-            transform: scale(0.5) translate(-300px, -250px);
+            transform: translateX(-250px);
         }
     }
   }
