@@ -4,7 +4,6 @@ import {useEffect, useState} from 'react';
 import {Statement} from '../models/Statement';
 import {Answer} from "../models/Answer";
 import {StatementAnswer} from "../enums/StatementAnswer.tsx";
-import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 import ResultModal from "../components/ResultModal.tsx";
 import logo from "../assets/vote.png";
 
@@ -14,9 +13,7 @@ const Form = () => {
     const [answers, setAnswers] = useState<Answer[]>([]);
 
     const [isExplanationVisible, setIsExplanationVisible] = useState<boolean>(false);
-    const [isSignificanceVisible, setIsSignificanceVisible] = useState<boolean>(false);
     const [statementAnswer, setStatementAnswer] = useState<StatementAnswer>(StatementAnswer.Unselected);
-    const [significanceAnswer, setSignificanceAnswer] = useState<SignificanceAnswer>(SignificanceAnswer.Unselected);
 
     const [farthestAnsweredStatementIndex, setFarthestAnsweredStatementIndex] = useState<number>(0);
 
@@ -76,15 +73,6 @@ const Form = () => {
     }, []);
 
     function setUserAnswer(answer: Answer) {
-        if (answer.statementAnswer === StatementAnswer.Neutral){
-            setIsSignificanceVisible(false);
-            setSignificanceAnswer(SignificanceAnswer.Unselected);
-        }
-        else {
-            setIsSignificanceVisible(true);
-            setSignificanceAnswer(answer.significanceAnswer);
-        }
-
         setStatementAnswer(answer.statementAnswer);
     }
 
@@ -106,8 +94,6 @@ const Form = () => {
             }
             else {
                 setStatementAnswer(StatementAnswer.Unselected);
-                setIsSignificanceVisible(false);
-                setSignificanceAnswer(SignificanceAnswer.Unselected);
             }
         }
     };
@@ -124,30 +110,7 @@ const Form = () => {
 
     const handleStatementButtonClick = (statementAnswer: StatementAnswer) => {
         setStatementAnswer(statementAnswer);
-        if (statementAnswer === StatementAnswer.Agree || statementAnswer === StatementAnswer.Disagree){
-
-            if (answers[currentStatement.Index].isAnswered()){
-                if (statementAnswer !== answers[currentStatement.Index].statementAnswer){
-                    setSignificanceAnswer(SignificanceAnswer.Unselected);
-                }
-            }
-
-            setIsSignificanceVisible(true);
-
-            const answer = new Answer(statementAnswer);
-            setAnswer(currentStatement.Index, answer);
-        }
-        else if (statementAnswer === StatementAnswer.Neutral){
-            const answer = new Answer(StatementAnswer.Neutral);
-            setAnswer(currentStatement.Index, answer);
-
-            handleStatementChange(currentStatement.Index + 1);
-        }
-    };
-
-    const handleSignificanceButtonClick = (significanceAnswer: SignificanceAnswer) => {
-        const answer = answers[currentStatement.Index];
-        answer.significanceAnswer = significanceAnswer;
+        const answer = new Answer(statementAnswer);
         setAnswer(currentStatement.Index, answer);
 
         handleStatementChange(currentStatement.Index + 1);
@@ -231,27 +194,6 @@ const Form = () => {
                             nie mam zdania
                         </button>
                     </div>
-                    {isSignificanceVisible ? 
-                    <div className="slajd__waga">
-                        <div className="slajd__waga-pytanie">
-                            Czy ta kwestia jest dla Ciebie bardzo ważna?
-                        </div>
-                        <div className="slajd__waga-odpowiedzi">
-                            <button
-                                id="tak"
-                                className={`button__secondary ${significanceAnswer === SignificanceAnswer.Yes ? 'button__secondary_active' : ''}`}
-                                onClick={() => handleSignificanceButtonClick(SignificanceAnswer.Yes)}>
-                                tak
-                            </button>
-                            <button
-                                id="nie"
-                                className={`button__secondary ${significanceAnswer === SignificanceAnswer.No ? 'button__secondary_active' : ''}`}
-                                onClick={() => handleSignificanceButtonClick(SignificanceAnswer.No)}>
-                                nie
-                            </button>
-                        </div>
-                    </div>
-                    : <></>}
                 </div>
                 <div className="statement_legend">
                     {statements.map((_, i) => (

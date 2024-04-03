@@ -2,8 +2,6 @@ import {Link, useNavigate} from "react-router-dom";
 import "../styles/wynik.scss";
 import {Answer} from "../models/Answer.tsx";
 import {useEffect, useState} from "react";
-import {StatementAnswer} from "../enums/StatementAnswer.tsx";
-import {SignificanceAnswer} from "../enums/SignificanceAnswer.tsx";
 import ResultChart from "../components/ResultChart.tsx";
 import logo from "../assets/vote.png";
 import x from "../assets/x.png"
@@ -23,38 +21,8 @@ const Wynik = () => {
     const navigate = useNavigate();
 
     function mapUserAnswersToValues(parsedAnswers: Answer[]) {
-        const answersValues: number[] = parsedAnswers.map((answer) => {
-            if (answer.statementAnswer === StatementAnswer.Agree) {
-                if (answer.significanceAnswer === SignificanceAnswer.Yes) {
-                    return 1;
-                }
-                else if (answer.significanceAnswer === SignificanceAnswer.No) {
-                    return 2;
-                }
-                else {
-                    return 0;
-                }
-            }
-            else if (answer.statementAnswer === StatementAnswer.Disagree) {
-                if (answer.significanceAnswer === SignificanceAnswer.Yes) {
-                    return 3;
-                }
-                else if (answer.significanceAnswer === SignificanceAnswer.No) {
-                    return 4;
-                }
-                else {
-                    return 0;
-                }
-            }
-            else if (answer.statementAnswer === StatementAnswer.Neutral) {
-                return 5;
-            }
-            else {
-                return 0;
-            }
-        });
+        const answersValues: number[] = parsedAnswers.map((answer) => answer.statementAnswer);
 
-        // setAnswersValues(answersValues);
         console.log(`answersValues: ${answersValues}`);
         return answersValues;
     }
@@ -127,18 +95,6 @@ const Wynik = () => {
                         if (userAnswers[j] !== 0 && committeesAnswers[i][j] !== 0) {
                             if (userAnswers[j] === committeesAnswers[i][j]) {
                                 userSimilarityPerCommittee[i] += 1;
-                            }
-                            else if (userAnswers[j] === 1 && committeesAnswers[i][j] === 2) {
-                                userSimilarityPerCommittee[i] += 0.5;
-                            }
-                            else if (userAnswers[j] === 2 && committeesAnswers[i][j] === 1) {
-                                userSimilarityPerCommittee[i] += 0.5;
-                            }
-                            else if (userAnswers[j] === 3 && committeesAnswers[i][j] === 4) {
-                                userSimilarityPerCommittee[i] += 0.5;
-                            }
-                            else if (userAnswers[j] === 4 && committeesAnswers[i][j] === 3) {
-                                userSimilarityPerCommittee[i] += 0.5;
                             }
                         }
                     }
