@@ -9,11 +9,9 @@
             font-weight: var(--font-medium);
             color: var(--akcent);
         }
-        h3{
+        h4{
             margin: 2rem 0;
-            color: var(--akcent);
             line-height: 1.2;
-            font-size: 1.5rem;
         }
         // .hero_button{
         //     color: var(--akcent);
@@ -48,11 +46,6 @@
 @media screen and (max-width: 992px) {
     .hero{
         height: 90vh;
-        .hero-info{
-            h3{
-                font-size: var(--h3-font-size);
-            }
-        }
         .light{
             height: 90vh;
         }
@@ -60,10 +53,12 @@
   }
   
   /* For medium devices */
-//   @media screen and (max-width: 768px) {
+//   @media screen and (max-width: 740px) {
 //     .hero{
-//         .light{
-//             display: none;
+//         .hero-info{
+//             h3{
+//                 font-size: 1rem;
+//             }
 //         }
 //     }
 //   }
@@ -76,28 +71,26 @@
 //     }
 // } 
   /* For small devices */
-  @media screen and (max-width: 413px) {
+  @media screen and (max-width: 500px) {
     .hero{
         align-items: baseline;
-        height: 80vh;
+        height: 820px;
         .hero__info{
-            position: absolute;
-            right: 0;
-            left: 0;
-            bottom: -35px;
-            border-radius: 1rem 1rem 0 0;
+            position: relative;
+            
+            // border-radius: 1rem 1rem 0 0;
             grid-column: 1/13;
             padding: 3rem 2rem;
             z-index: 3;
             text-align: center;
-            backdrop-filter: blur( 30px );
+            // backdrop-filter: blur( 30px );
+            background-color: var(--body-color-light);
             box-shadow: 0 -8px 32px 0 rgba( 31, 38, 135, 0.1 );
             .button__secondary{
                 background-color: var(--akcent);
                 color: var(--text-color-light);
             }
-            h3{
-                font-size: var(--h3-font-size);
+            h4{
                 background-color: rgba(215,230,238, $alpha: 0.8);
                 padding: .5rem;
                 border-radius: 1rem;
@@ -105,8 +98,8 @@
         }
         .light{
             height: 80vh;
-            position: block;
-            // top: 0;
+            display: block;
+            top: 340px;
             // left: -100px;
             object-fit: cover;
             object-position: 82% 50%;

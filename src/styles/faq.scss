@@ -25,9 +25,13 @@
                 div{
                     display: flex;
                     justify-content: space-between;
+                    h3{
+                        line-height: 1.2;
+                    }
                     svg{
-                    width: 1.5rem;
-                    height: 1.5rem;
+                        width: 1.5rem;
+                        min-width: 1.5rem;
+                        min-height: 1.5rem;
                     }
                 }
                 .hidden{
@@ -44,7 +48,7 @@
         }
     }
 }
-@media screen and (max-width: 413px) {
+@media screen and (max-width: 650px) {
     .faq{
         height: auto;
         gap:0;

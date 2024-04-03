@@ -45,10 +45,10 @@ const Hero = () => {
         <section className="section hero" id="Hero">
             <div className="hero__info">
                 <h1>Wybierz świadomie </h1>
-                <h3> Odpowiedz na pytania i przekonaj się, 
+                <h4> Odpowiedz na pytania i przekonaj się, 
                     do kogo jest Ci najbliżej w gdańskich wyborach 
                     samorządowych w 2024 roku.
-                </h3>
+                </h4>
                 <Link to="/Form"><button className="button__secondary">Rozpocznij test</button></Link>
             </div>
             {/* <div className="hero__image">

@@ -45,15 +45,35 @@
     }
 }
 
-@media screen and (max-width: 413px) {
+@media screen and (max-width: 1200px) {
+    .kontakt{
+        .kontakt__logo{
+            grid-column: 7/12;
+        }
+    }
+}
+@media screen and (max-width: 700px) {
+    .kontakt{
+        .kontakt__logo{
+            grid-column: 9/12;
+            width: 150px;
+        }
+        .mewa{
+            display: none;
+        }
+    }
+}
+@media screen and (max-width: 500px) {
     .kontakt{
         .kontakt__info{
             grid-column: 2/12;
         }
         .kontakt__logo{
+            width: 200px;
             grid-column: 2/12;
         }
         .mewa{
+            display: block;
             width: 150px;
             right: 1.5rem;
         }
