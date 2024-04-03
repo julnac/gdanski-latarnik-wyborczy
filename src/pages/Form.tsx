@@ -5,7 +5,7 @@ import {Statement} from '../models/Statement';
 import {Answer} from "../models/Answer";
 import {StatementAnswer} from "../enums/StatementAnswer.tsx";
 import ResultModal from "../components/ResultModal.tsx";
-import logo from "../assets/vote.png";
+// import logo from "../assets/vote.png";
 
 const Form = () => {
     const [statements, setStatements] = useState<Statement[]>([]);
@@ -144,11 +144,11 @@ const Form = () => {
         <section className="section ankieta" id="Ankieta">
             <div className="nawigacja">
                 <div className="logo">
-                    <img src={logo} alt="logo"/>
+                    {/* <img src={logo} alt="logo"/> */}
                     <Link to="/"><a>Gdański Latarnik Wyborczy</a></Link>
                 </div>
                 <Link to="/">
-                    <button className="button">Wróć do strony</button></Link>
+                    <button className="button">Wróć</button></Link>
             </div>
             <div className="ankieta__karuzela">
                 <div className="slajd">

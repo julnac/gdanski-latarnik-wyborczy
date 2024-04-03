@@ -28,7 +28,7 @@
         height: 100vh;
         .slajd{
             padding-top: 20vh;
-            height: 90%;
+            height: 80%;
             display: flex;
             flex-direction: column;
             justify-content: start;
@@ -108,9 +108,10 @@
             }
         }
         .statement_legend {
-            height: 10%;
+            height: 20%;
             width: 100%;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             .statement_legend_unvisited{

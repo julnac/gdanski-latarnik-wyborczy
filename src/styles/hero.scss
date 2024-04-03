@@ -8,10 +8,6 @@
         h1{
             font-weight: var(--font-medium);
             color: var(--akcent);
-            span{
-                font-style: italic;
-                font-size: var(--h1-font-size);
-            }
         }
         h3{
             margin: 2rem 0;
@@ -100,11 +96,20 @@
                 background-color: var(--akcent);
                 color: var(--text-color-light);
             }
+            h3{
+                font-size: var(--h3-font-size);
+                background-color: rgba(215,230,238, $alpha: 0.8);
+                padding: .5rem;
+                border-radius: 1rem;
+            }
         }
         .light{
-            // display: block;
             height: 80vh;
-            transform: translateX(-250px);
-        }
+            position: block;
+            // top: 0;
+            // left: -100px;
+            object-fit: cover;
+            object-position: 82% 50%;
     }
   }
+}

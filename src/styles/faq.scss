@@ -55,6 +55,9 @@
         .faq__questions{
             grid-column: 2/12;
             margin-bottom: 0;
+            .item{
+                padding: 1rem 0;
+            }
         }
     }
 }

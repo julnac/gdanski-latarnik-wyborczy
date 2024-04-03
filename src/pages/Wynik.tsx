@@ -3,10 +3,11 @@ import "../styles/wynik.scss";
 import {Answer} from "../models/Answer.tsx";
 import {useEffect, useState} from "react";
 import ResultChart from "../components/ResultChart.tsx";
-import logo from "../assets/vote.png";
+// import logo from "../assets/vote.png";
 import x from "../assets/x.png"
 import li from "../assets/li.png"
 import faceb from "../assets/fb.png"
+import Kontakt from "../components/Kontakt";
 
 const baseUrl: { [platform: string]: string } = {
     facebook: "https://www.facebook.com/sharer/sharer.php?u=",
@@ -119,14 +120,15 @@ const Wynik = () => {
     }
 
     return (
+        <>
         <section className="section wynik" id="Wynik">
             <div className="nawigacja">
                 <div className="logo">
-                    <img src={logo} alt="logo"/>
+                    {/* <img src={logo} alt="logo"/> */}
                     <Link to="/"><a>Gdański Latarnik Wyborczy</a></Link>
                 </div>
                 <Link to="/">
-                    <button className="button">Wróć do strony</button></Link>
+                    <button className="button">Wróć</button></Link>
             </div>
             <div className="content">
                 <div className="header">
@@ -142,18 +144,43 @@ const Wynik = () => {
                         <button onClick={() => handleShare("facebook")}>
                             <img src={faceb} alt="fb"/>
                         </button>
-
-                        
                     </div>
                 </div>
                 <p>Wykres przedstawia zgodność Twoich poglądów z deklaracjami poszczególnych komitetów wyborczych.</p>
                 <div className="chart">
-                <ResultChart
-                    values={userSimilarityPerCommittee}
-                    labels={committees} />
-            </div>
+                    <ResultChart
+                        values={userSimilarityPerCommittee}
+                        labels={committees} />
+                </div>
+                <div className="mobile-share">
+                    <p>Podaj dalej </p>
+                    <button onClick={() => handleShare("twitter")}>
+                        <img src={x} alt="x"/>
+                    </button>
+                    <button onClick={() => handleShare("linkedin")}>
+                        <img src={li} alt="li"/>
+                    </button>
+                    <button onClick={() => handleShare("facebook")}>
+                        <img src={faceb} alt="fb"/>
+                    </button>
+                </div>
+                <div className="legend">
+                    <p>Legenda:</p>
+                    <ul>
+                        <li><span>KO</span>: Koalicja Obywatelska</li>
+                        <li><span>PiS</span>: Prawo i Sprawiedliwość</li>
+                        <li><span>WGD 2050</span>: Wspólna Gdańska Droga 2050</li>
+                        <li><span>Konf-Bezp-PJJ</span>: Konfederacja - Bezpartyni - Polska Jest Jedna</li>
+                        <li><span>KG</span>: Kocham Gdańsk - kandydaci niezależni</li>
+                        <li><span>KwwMA</span>: Komitet wyborczy wyborców Mariusza Andrzejczaka</li>
+                        <li><span>SG</span>: Społeczny Gdańsk</li>
+                    </ul>
+
+                </div>
             </div>
         </section>
+        <Kontakt />
+        </>
     )
 }
 

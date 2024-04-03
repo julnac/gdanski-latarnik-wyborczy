@@ -23,7 +23,7 @@ ChartJS.register(
 
 ChartJS.defaults.borderColor = 'rgba(0,0,0)';
 ChartJS.defaults.color = 'rgba(0,0,0)';
-ChartJS.defaults.font.size = 16;
+ChartJS.defaults.font.size = 14;
 
 
 interface DatalabelsConfig {
@@ -53,7 +53,6 @@ const options = {
         } as DatalabelsConfig,
     },
     scales: {
-
         x: {
             grid: {
                 display: false
@@ -61,7 +60,7 @@ const options = {
             ticks: {
                 autoSkip: false,
                 maxRotation: 30,
-                minRotation: 45
+                minRotation: 30,
             }
         },
         y: {
@@ -77,7 +76,7 @@ interface ResultChartProps {
 
 const ResultChart: React.FC<ResultChartProps> = ({values, labels}) => {
     const data = {
-        labels,
+        labels: labels,
         datasets: [
             {
                 data: values,
@@ -88,5 +87,17 @@ const ResultChart: React.FC<ResultChartProps> = ({values, labels}) => {
 
     return <Bar className="bar" options={options} data={data} />;
 }
+
+// const splitLabelsToWords = (labels: string[]) => {
+//     const labelsSplittedToWordArrays = [];
+//     for (const label of labels) {
+//         const newLabel = [];
+//         const words = label.split(' ');
+//         newLabel.push(...words)
+//         labelsSplittedToWordArrays.push(newLabel);
+//     }
+//     console.log(labelsSplittedToWordArrays)
+//     return labelsSplittedToWordArrays;
+//   };
 
 export default ResultChart;

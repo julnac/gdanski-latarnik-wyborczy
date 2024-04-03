@@ -1,6 +1,7 @@
 .wynik{
     margin: 0;
     padding: 0;
+    height: auto;
     .nawigacja{
         display: flex;
         justify-content: space-between;
@@ -26,7 +27,7 @@
     }
     .content{
         grid-column: 4/10;
-        height: 100vh;
+        // height: 100vh;
         padding-top: 20vh;
         .header{
             display: flex;
@@ -56,6 +57,15 @@
         .chart{
             width: 100%;
         }
+        .mobile-share{
+            display: none;
+        }
+        .legend{
+            margin: 5rem 0;
+            span{
+                font-weight: var(--font-bold);
+            }
+        }
     }
     
 }
@@ -64,12 +74,35 @@
     .wynik{
         .content{
             grid-column: 2/12;
-            height: 100vh;
-            padding-top: 20vh;
+            // height: 100vh;
             .header{
+                .share{
+                    display: none;
+                }
                 h3{
                     font-weight: var(--font-bold);
                 }
+            }
+            .mobile-share{
+                margin: 2rem 0;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                p{
+                    padding-right: .5rem;
+                    border-right: 1px solid var(--text-color-dark);
+                }
+                button{
+                    background-color: var(--body-color-light);
+                    img{
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        border-radius: .2rem;
+                    }
+                }
+            }
+            .legend{
+                margin: 2rem 0;
             }
         }
     }

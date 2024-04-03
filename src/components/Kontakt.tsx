@@ -20,7 +20,7 @@ const Kontakt = () => {
             </div>
             <img className="mewa" src={mewa} alt="mewa"/>
             <footer>
-                <p>Info prawne</p>
+                <p>Administratorem danych jest GFS</p>
             </footer>
             
         </section>
