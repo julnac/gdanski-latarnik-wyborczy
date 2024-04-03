@@ -2,6 +2,7 @@ import "../styles/kontakt.scss";
 // import { Link } from "react-router-dom";
 import mewa from "../assets/mewa1.png";
 import logo from "../assets/logo-gfs.png"
+import faceb from "../assets/fb-blue.png"
 
 
 const Kontakt = () => {
@@ -11,9 +12,10 @@ const Kontakt = () => {
                 <h2>KONTAKT</h2>
                 <p>Gdańskie Forum Samorządowe</p>
                 <p>e-mail: gdanskieforumsamorzadowe@gmail.com</p>
-                <a href="https://www.facebook.com/stronagfs?locale=pl_PL"><p>Facebook</p></a>
-                
-                {/* <Link to="/Form"><button className="button">Rozpocznij test</button></Link> */}
+                <div className="fb">
+                    <img src={faceb} alt="fb"/>  
+                    <a href="https://www.facebook.com/stronagfs?locale=pl_PL" target="_blank"><p>Facebook</p></a>
+                </div>
             </div>
             <div className="kontakt__logo">
                 <img className="logo" src={logo} alt="logo"/>
