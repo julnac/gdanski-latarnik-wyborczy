@@ -12,7 +12,7 @@ const Form = () => {
     const [currentStatement, setCurrentStatement] = useState<Statement>(new Statement());
     const [answers, setAnswers] = useState<Answer[]>([]);
 
-    const [isExplanationVisible, setIsExplanationVisible] = useState<boolean>(false);
+    // const [isExplanationVisible, setIsExplanationVisible] = useState<boolean>(false);
     const [statementAnswer, setStatementAnswer] = useState<StatementAnswer>(StatementAnswer.Unselected);
 
     const [farthestAnsweredStatementIndex, setFarthestAnsweredStatementIndex] = useState<number>(0);
@@ -98,9 +98,9 @@ const Form = () => {
         }
     };
 
-    const handleExplanationOpen = () => {
-        setIsExplanationVisible(!isExplanationVisible);
-    };
+    // const handleExplanationOpen = () => {
+    //     setIsExplanationVisible(!isExplanationVisible);
+    // };
 
     const setAnswer = (index: number, answer: Answer) => {
         const updatedAnswers = [...answers];
@@ -154,7 +154,7 @@ const Form = () => {
                 <div className="slajd">
                     <div className="noglowek">
                         <div className="tytul"><h3>Stwierdzenie: {currentStatement ? currentStatement.Index + 1 : 'Loading...'}</h3></div>
-                        <div className="wyjasnienie">
+                        {/* <div className="wyjasnienie">
                             <button onClick={handleExplanationOpen}>Wyjaśnienie stwierdzenia</button>
                             {isExplanationVisible ?
                                 <div className="dark">
@@ -169,7 +169,7 @@ const Form = () => {
                                 </div>
                                 : <></>
                             }
-                        </div>
+                        </div> */}
                     </div>
                     <div className="slajd__stwierdzenie">
                         <h3>{currentStatement ? currentStatement.StatementText : 'Loading...'}</h3>
