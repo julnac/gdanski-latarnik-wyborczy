@@ -1,6 +1,6 @@
 # Gdański latarnik wyborczy
 
-Author: Julia NAczke, Grzegorz Pozorski 
+Author: Julia Pozorska, Grzegorz Pozorski 
 Date: December 2023 - present
 
 ## Introduction
